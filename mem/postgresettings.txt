@@ -1,0 +1,7 @@
+installed:
+	postegres v16.3
+with:
+	command line tools 
+	stack builder
+and:
+	dbeaver for gui ( not pgadmin )

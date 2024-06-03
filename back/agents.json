@@ -1,0 +1,18 @@
+{
+    "agents": [
+        {
+            "id": 1,
+            "name":"سمير لخضر",
+            "username": "samir1988",
+            "password": "samirlakhder88",
+            "birthDate": "1988/1/1"
+        },
+        {
+            "id": 2,
+            "name":"مربوح توفيق",
+            "username": "toufik1988",
+            "password": "toufikmarbouh95",
+            "birthDate": "1995/1/1"
+        }
+    ]
+}
