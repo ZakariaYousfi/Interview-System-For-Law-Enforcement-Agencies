@@ -1,8 +1,8 @@
 import json
 
 # Opening JSON file
-f1 = open('/auditions/a1.json', encoding="utf8")
-f2 = open('/auditions/a2.json', encoding="utf8")
+f1 = open('auditions/a1.json', encoding="utf8")
+f2 = open('auditions/a2.json', encoding="utf8")
  
 # returns JSON object as 
 # a dictionary
@@ -22,9 +22,10 @@ model = SentenceTransformer('sentence-transformers/all-MiniLM-L6-v2')
 qcosine_scores = []
 for i in d1['content']:
     embeddings1 = model.encode(qa['q'])
-    embeddings2 = model.encode(i['a'])
+    embeddings2 = model.encode(i['q'])
     #Compute cosine-similarits
-    qcosine_scores.append(util.pytorch_cos_sim(embeddings1, embeddings2))
+    qcosine_scores.append(util.
+    pytorch_cos_sim(embeddings1, embeddings2))
     #Output the pairs with their score
 
 for i in range(len(d1['content'])):
