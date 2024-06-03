@@ -3,6 +3,24 @@ from flask_cors import CORS, cross_origin
 from flask import request, Response
 import json
 
+# Opening JSON file
+f1 = open('auditions/a1.json', encoding="utf8")
+ 
+# returns JSON object as 
+# a dictionary
+d1 = json.load(f1)
+ 
+
+# Closing file
+f1.close()
+
+
+from sentence_transformers import SentenceTransformer, util
+model = SentenceTransformer('sentence-transformers/all-MiniLM-L6-v2')
+
+
+
+
 app = Flask(__name__)
 CORS(app, support_credentials=True)
 
@@ -49,7 +67,41 @@ def auth_page(opt=None):
         resp = Response()
         resp.status = 401
     return resp
-       
+
+@app.route("/recommendation", methods=['GET', 'POST'])
+@cross_origin(supports_credentials=True)
+def hello_world():
+    content = request.get_json(silent=True)
+    qcosine_scores = []
+    for i in d1['content']:
+        embeddingsq1 = model.encode(content['q'])
+        embeddingsq2 = model.encode(i['q'])
+        embeddingsa1 = model.encode(content['a'])
+        embeddingsa2 = model.encode(i['a'])
+        #Compute cosine-similarits
+        qcosine_scores.append({"q": util.
+        pytorch_cos_sim(embeddingsq1, embeddingsq2),
+        "a":util.pytorch_cos_sim(embeddingsa1, embeddingsa2)})
+        #Output the pairs with their score
+
+    qa_scores = {}
+
+    for i in range(len(d1['content'])):
+        qa_scores[i] = qcosine_scores[i]
+        # print("{} \t\t {} \t\t Score: {}".format(d1['content'][i], qa, qcosine_scores[i][0][0]))
+
+    print(qa_scores)
+
+    product = []
+    for j in qa_scores:
+        product.append(qa_scores[j]["q"]*qa_scores[j]["a"])
+
+    print(product)
+
+    print(product.index(max(product)))
+    resp = Response(json.dumps(content))
+    return resp       
+
 
 if __name__ == "__main__":
   app.run(host='127.0.0.1', port=5000, debug=True)

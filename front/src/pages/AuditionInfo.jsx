@@ -15,7 +15,7 @@ function AuditionInfo() {
   const [birthMonth, setBirthMonth] = useState("");
   const [birthDay, setBirthDay] = useState("");
   const [personNumber, setPersonNumber] = useState("");
-  //const navigate = useNavigate();
+  const navigate = useNavigate();
   const dispatch = useDispatch()
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -32,7 +32,7 @@ function AuditionInfo() {
     console.log(personData);
 
     // Example: Redirect to another page on successful submission
-    //navigate("/audition");
+    navigate("/audition");
   };
 
   return (
@@ -54,9 +54,9 @@ function AuditionInfo() {
             <SelectContent>
                 <SelectGroup>
                 <SelectLabel>نوع الشخص</SelectLabel>
-              <SelectItem value="suspect">مشتبه به</SelectItem>
-              <SelectItem value="witness">شاهد</SelectItem>
-              <SelectItem value="victim">ضحية</SelectItem>
+              <SelectItem value="مشتبه به">مشتبه به</SelectItem>
+              <SelectItem value="شاهد">شاهد</SelectItem>
+              <SelectItem value="ضحية">ضحية</SelectItem>
               </SelectGroup>
               </SelectContent>
             </Select>

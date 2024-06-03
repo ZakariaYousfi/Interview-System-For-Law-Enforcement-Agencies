@@ -10,10 +10,10 @@ export const auditionSlice = createSlice({
   },
   reducers: {
     setInfo: (state, action) => {
-    state.name = action.payload.name
-    state.type = action.payload.type
+    state.name = action.payload.personName
+    state.type = action.payload.personType
     state.birthDate = action.payload.birthDate
-    state.number = action.payload.number
+    state.number = action.payload.personNumber
     },
   }
 })
