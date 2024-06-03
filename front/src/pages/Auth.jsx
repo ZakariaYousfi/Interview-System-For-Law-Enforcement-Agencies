@@ -5,8 +5,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import "../App.css"; // Assuming you have your custom CSS here
 import { useDispatch } from "react-redux";
-import { setAuth, setName } from "../features/agent/agentSlice";
-function AuthPage() {
+import { setAuth } from "../features/agent/agentSlice";
+function Auth() {
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -45,15 +45,18 @@ function AuthPage() {
       referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
       body: JSON.stringify(credentials), // body data type must match "Content-Type" header
     });
+
+    if(response.status == 401) {
+      alert("اسم المستخدم او الرقم السري خاطئ")
+    } else {
     const jsonResponse = await response.json();
     console.log(jsonResponse) // parses JSON response into native JavaScript objects
 
     if (response.ok) {
-      dispatch(setAuth({name: jsonResponse.name}))
-    } else {
-      alert("اسم المستخدم او الرقم السري خاطئ")
+      dispatch(setAuth({...credentials, name: jsonResponse.name}))
+      navigate("/home");
     }
-    navigate("/home");
+  }
   };
 
   return (
@@ -96,4 +99,4 @@ function AuthPage() {
   );
 }
 
-export default AuthPage;
+export default Auth;

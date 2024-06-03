@@ -39,11 +39,15 @@ def admin_page(opt=None):
 @cross_origin(supports_credentials=True)
 def auth_page(opt=None):
     login = False
-    if(request.args.get("username") == "abcd" and request.args.get("password") == "abcdabcd" ):
+    content = request.get_json(silent=True)
+    if(content["username"] == "abcd" and content["password"] == "abcdabcd" ):
         login = True
-    resp = Response(json.dumps({"name" : "lolmaster"}))
-    resp.headers["Access-Control-Expose-Headers"] = "*"
-    resp.status = 200
+        resp = Response(json.dumps({"name" : "lolmaster"}))
+        resp.headers["Access-Control-Expose-Headers"] = "*"
+        resp.status = 200
+    else:
+        resp = Response()
+        resp.status = 401
     return resp
        
 
