@@ -11,7 +11,7 @@ const Home = () => (
             <Link to="/create-audition">
                 <Button variant="secondary">بدء مقابلة جديدة</Button>
             </Link>
-            <Link to="/open-audition">
+            <Link to="/audition">
                 <Button variant="accent">رؤية المقابلات السابقة</Button>
             </Link>
         </div>

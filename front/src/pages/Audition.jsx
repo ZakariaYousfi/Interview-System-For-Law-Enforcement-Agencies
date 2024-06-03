@@ -58,11 +58,17 @@ function Audition() {
   
   return (
     <div className="flex flex-col h-screen">
-      <header className="bg-gray-800 text-white p-4">
+      <header className="bg-gray-800 text-white p-4 flex justify-between items-center">
       <Link to="/home">
-                <Button variant="primary">Go Back</Button>
-            </Link>
-      </header>
+        <Button variant="primary">إلغاء المقابلة</Button>
+      </Link>
+      <div className="text-right">
+        <p className="text-lg font-semibold">personType</p>
+        <p className="text-sm">Name: personName</p>
+        <p className="text-sm">Birthdate: birthDate</p>
+        <p className="text-sm">Number: personNumber</p>
+      </div>
+    </header>
       <div className="flex flex-grow">
         <main className="flex-grow overflow-y-auto p-4 bg-white">
           {pairs.map((pair, index) => (
@@ -80,7 +86,7 @@ function Audition() {
         <form onSubmit={add} >
           <Input id="q" placeholder="سؤال" ref={q} className="flex-grow mb-1" />
           <Input id="a" placeholder="جواب" ref={a} className="flex-grow mb-1" />
-          <Button type="submit">Send</Button>
+          <Button type="submit">تأكيد</Button>
         </form>
       </footer>
     </div>
