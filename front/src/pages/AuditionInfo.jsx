@@ -5,6 +5,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue, SelectLabel, SelectGroup} from "@/components/ui/select";
 import "../App.css"; // Assuming you have your custom CSS here
+import { setInfo } from "../features/audition/auditionSlice";
+import { useDispatch } from "react-redux";
 
 function AuditionInfo() {
   const [personType, setPersonType] = useState("");
@@ -14,7 +16,7 @@ function AuditionInfo() {
   const [birthDay, setBirthDay] = useState("");
   const [personNumber, setPersonNumber] = useState("");
   //const navigate = useNavigate();
-
+  const dispatch = useDispatch()
   const handleSubmit = (e) => {
     e.preventDefault();
     // Handle form submission logic here
@@ -25,7 +27,10 @@ function AuditionInfo() {
       personNumber,
     };
 
+    dispatch(setInfo(personData))
+
     console.log(personData);
+
     // Example: Redirect to another page on successful submission
     //navigate("/audition");
   };
@@ -44,7 +49,7 @@ function AuditionInfo() {
               onValueChange={(value) => setPersonType(value)}
             >
               <SelectTrigger className="w-full mt-2">
-                <SelectValue placeholder="Select a type" />
+                <SelectValue placeholder="حدد نوع الشخص" />
                 </SelectTrigger>
             <SelectContent>
                 <SelectGroup>
@@ -70,7 +75,7 @@ function AuditionInfo() {
             />
           </div>
           <div>
-            <label className="block text-gray-700">يوم الميلاد</label>
+            <label className="block text-gray-700">تاريخ الميلاد</label>
             <div className="flex space-x-2 mt-2">
               <Input
                 id="birthYear"

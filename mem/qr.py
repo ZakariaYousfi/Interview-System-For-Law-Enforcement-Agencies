@@ -21,14 +21,28 @@ model = SentenceTransformer('sentence-transformers/all-MiniLM-L6-v2')
 
 qcosine_scores = []
 for i in d1['content']:
-    embeddings1 = model.encode(qa['q'])
-    embeddings2 = model.encode(i['q'])
+    embeddingsq1 = model.encode(qa['q'])
+    embeddingsq2 = model.encode(i['q'])
+    embeddingsa1 = model.encode(qa['a'])
+    embeddingsa2 = model.encode(i['a'])
     #Compute cosine-similarits
-    qcosine_scores.append(util.
-    pytorch_cos_sim(embeddings1, embeddings2))
+    qcosine_scores.append({"q": util.
+    pytorch_cos_sim(embeddingsq1, embeddingsq2),
+    "a":util.pytorch_cos_sim(embeddingsa1, embeddingsa2)})
     #Output the pairs with their score
 
+qa_scores = {}
+
 for i in range(len(d1['content'])):
-    print("{} \t\t {} \t\t Score: {}".format(d1['content'][i], qa, qcosine_scores[i][0][0]))
+    qa_scores[i] = qcosine_scores[i]
+    # print("{} \t\t {} \t\t Score: {}".format(d1['content'][i], qa, qcosine_scores[i][0][0]))
 
+print(qa_scores)
 
+product = []
+for j in qa_scores:
+    product.append(qa_scores[j]["q"]*qa_scores[j]["a"])
+
+print(product)
+
+print(product.index(max(product)))
