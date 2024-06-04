@@ -60,7 +60,7 @@ function Audition() {
 
   const getRecommendation = async () => {
   
-      const pair = pairs[pairs.length]
+      const pair = pairs[pairs.length - 1]
   
       const url = import.meta.env.VITE_JSON_SERVER_URL + '/recommendation'
   
@@ -89,7 +89,7 @@ function Audition() {
   
       if (response.ok) {
         console.log(jsonResponse)
-        setRecommended('tbd')
+        setRecommended(jsonResponse)
       } else {
         console.error("Recommendation failed");
       }
@@ -102,8 +102,9 @@ function Audition() {
     <div className="flex flex-col h-screen">
       <header className="bg-gray-800 text-white p-4 flex justify-between items-center">
       <Link to="/home">
-        <Button variant="primary">إلغاء المقابلة</Button>
+        <Button variant="primary">إلغاء الجلسة</Button>
       </Link>
+      <Button variant="primary">إغلاق الجلسة</Button>
       <div className="text-right">
         <p className="text-lg font-semibold">{personData.type}</p>
         <p className="text-sm">{personData.name} : الاسم</p>
@@ -120,11 +121,18 @@ function Audition() {
             </div>
           ))}
         </main>
-        <aside className="bg-gray-200 w-1/4 p-4">
+        <aside className="bg-gray-200 p-4 w-1/4 overflow-y-auto">
           {/* Placeholder for future content */}
           <Button onClick = { getRecommendation }>طلب اسئلة مقترحة</Button>
-          <hr/>
-          <p>{recommended[0]}</p>
+          <h2 className="text-xl font-semibold mb-4 mt-2">{recommended.length ? ':الأسئلة المقترحة' : ''}</h2>
+  <ul className="space-y-4">
+    {recommended.map((question, i) => (
+      <li key={i} className="bg-white p-4 rounded-lg shadow-md">
+        <span className="block text-gray-800 font-medium">{question}؟</span>
+        <hr className="my-2 border-gray-300" />
+      </li>
+    ))}
+  </ul>
         </aside>
       </div>
       <footer className="bg-gray-800 p-4 fixed bottom-0 w-3/4">

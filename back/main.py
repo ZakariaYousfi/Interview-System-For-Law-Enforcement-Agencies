@@ -70,8 +70,9 @@ def auth_page(opt=None):
 
 @app.route("/recommendation", methods=['GET', 'POST'])
 @cross_origin(supports_credentials=True)
-def hello_world():
+def question_recommendation():
     content = request.get_json(silent=True)
+    print(content)
     qcosine_scores = []
     for i in d1['content']:
         embeddingsq1 = model.encode(content['q'])
@@ -98,8 +99,16 @@ def hello_world():
 
     print(product)
 
-    print(product.index(max(product)))
-    resp = Response(json.dumps(content))
+    index = product.index(max(product))
+
+    recommended = []
+
+    for i in range(index + 1, len(d1['content'])):
+        recommended.append(d1['content'][i]['q'])
+
+    resp = Response(json.dumps(recommended))
+    resp.status = 200
+    resp.headers["Access-Control-Expose-Headers"] = "*"
     return resp       
 
 

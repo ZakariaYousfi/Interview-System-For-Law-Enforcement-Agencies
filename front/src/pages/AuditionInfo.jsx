@@ -38,7 +38,7 @@ function AuditionInfo() {
   return (
     <div className="flex items-center justify-center h-screen bg-gray-100">
       <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
-        <h1 className="text-2xl font-bold mb-6 text-center">يرجى إدخال بيانات المقابلة</h1>
+        <h1 className="text-2xl font-bold mb-6 text-center">يرجى إدخال بيانات الجلسة</h1>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label htmlFor="personType" className="block text-gray-700">

@@ -9,10 +9,10 @@ const Home = () => (
                 <Button variant="primary">العودة إلى القضايا</Button>
             </Link>
             <Link to="/create-audition">
-                <Button variant="secondary">بدء مقابلة جديدة</Button>
+                <Button variant="secondary">بدء جلسة جديدة</Button>
             </Link>
             <Link to="/audition">
-                <Button variant="accent">رؤية المقابلات السابقة</Button>
+                <Button variant="accent">رؤية الجلسات السابقة</Button>
             </Link>
         </div>
     </div>
