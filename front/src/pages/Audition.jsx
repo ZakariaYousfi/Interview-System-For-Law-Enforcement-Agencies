@@ -15,9 +15,14 @@ function Audition() {
   const [customQuestion, setCustomQuestion] = useState("");
   const [answer, setAnswer] = useState("");
   const [gapFill, setGapFill] = useState("");
+  const [year, setYear] = useState("");
+  const [month, setMonth] = useState("");
+  const [day, setDay] = useState("");
+  const [hour, setHour] = useState("");
 
   const predefinedQuestions = [
     "___ ما علاقتك مع",
+    " اين كنت يوم "
   ];
 
   const add = async (e) => {
@@ -26,7 +31,9 @@ function Audition() {
 
     const question = isCustomQuestion
     ? customQuestion
-    : selectedQuestion.replace("___", gapFill);
+    : (selectedQuestion.includes("___") 
+    ? selectedQuestion.replace("___", gapFill) 
+    : selectedQuestion + year + "|" + month + "|" + day + "|" + hour)
 
     const pair = {
       q: question,
@@ -163,7 +170,7 @@ function Audition() {
             />
           ) : (
             <div className="flex flex-grow space-x-2">
-              {selectedQuestion.includes("___") && (
+              {selectedQuestion.includes("___") ? (
                 <Input
                   type="text"
                   placeholder="املأ الفراغ"
@@ -171,7 +178,43 @@ function Audition() {
                   onChange={(e) => setGapFill(e.target.value)}
                   className="flex-grow mb-1"
                 />
-              )}
+              ) :
+              selectedQuestion != "" &&
+              <>
+              <Input
+                id="Year"
+                type="text"
+                value={year}
+                onChange={(e) => setYear(e.target.value)}
+                placeholder="العام"
+                className="flex-grow"
+              />
+              <Input
+                id="Month"
+                type="text"
+                value={month}
+                onChange={(e) => setMonth(e.target.value)}
+                placeholder="الشهر"
+                className="flex-grow"
+              />
+              <Input
+                id="Day"
+                type="text"
+                value={day}
+                onChange={(e) => setDay(e.target.value)}
+                placeholder="اليوم"
+                className="flex-grow"
+              />
+                <Input
+                id="Hour"
+                type="text"
+                value={hour}
+                onChange={(e) => setHour(e.target.value)}
+                placeholder="الساعة"
+                className="flex-grow"
+              />
+              </>
+            }
               <select
                 value={selectedQuestion}
                 onChange={(e) => setSelectedQuestion(e.target.value)}
@@ -195,7 +238,7 @@ function Audition() {
         <div>
           <Input
             type="text"
-            placeholder="أكتب أجابتك"
+            placeholder="أكتب الاجابة"
             value={answer}
             onChange={(e) => setAnswer(e.target.value)}
             className="flex-grow mb-1"
