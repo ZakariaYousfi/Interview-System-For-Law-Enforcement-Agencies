@@ -2,6 +2,12 @@ from flask import Flask, jsonify
 from flask_cors import CORS, cross_origin
 from flask import request, Response
 import json
+# -*- coding: utf8 -*-
+import gensim
+import re
+import numpy as np
+from nltk import ngrams
+from utilities import * # import utilities.py module
 
 # Opening JSON file
 f1 = open('auditions/a1.json', encoding="utf8")
@@ -18,8 +24,28 @@ f1.close()
 from sentence_transformers import SentenceTransformer, util
 model = SentenceTransformer('sentence-transformers/all-MiniLM-L6-v2')
 
+# ============================== 
+# ====== Uni-Grams Models ======
 
+t_model = gensim.models.Word2Vec.load('./models/full_uni_cbow_100_twitter.mdl')
 
+father = clean_str(u'ابي')
+son = clean_str(u'اخي')
+"""
+print("الكلمة: " + token)
+most_similar = t_model.wv.most_similar( token, topn=10 )
+for term, score in most_similar:
+    print(term, score)
+# get a word vector
+word_vector = t_model.wv[ token ]
+"""
+father_vector = t_model.wv[ father ]
+son_vector = t_model.wv[ son ]
+
+relations = {
+    "ابي": father_vector,
+    "اخي": son_vector,
+}
 
 app = Flask(__name__)
 CORS(app, support_credentials=True)

@@ -1,29 +1,37 @@
 import "../App.css";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { Link } from 'react-router-dom';
 import { useSelector } from "react-redux";
 
 function Audition() {
 
-  const q = useRef('')
-  const a = useRef('')
-  const personData = useSelector( state => state.audition)
+  const personData = useSelector(state => state.audition)
   const [pairs, setPairs] = useState([]);
   const [recommended, setRecommended] = useState([]);
+  const [isCustomQuestion, setIsCustomQuestion] = useState(true);
+  const [selectedQuestion, setSelectedQuestion] = useState("");
+  const [customQuestion, setCustomQuestion] = useState("");
+  const [answer, setAnswer] = useState("");
+  const [gapFill, setGapFill] = useState("");
+
+  const predefinedQuestions = [
+    "___ ما علاقتك مع",
+  ];
 
   const add = async (e) => {
 
     e.preventDefault()
 
-    const pair = {
-      q: q.current.value,
-      a: a.current.value
-    }
+    const question = isCustomQuestion
+    ? customQuestion
+    : selectedQuestion.replace("___", gapFill);
 
-    q.current.value = ''
-    a.current.value = ''
+    const pair = {
+      q: question,
+      a: answer
+    }
 
     const url = import.meta.env.VITE_JSON_SERVER_URL 
 
@@ -52,11 +60,20 @@ function Audition() {
 
     if (response.ok) {
       setPairs((prevPairs) => [...prevPairs, jsonResponse]);
+      setCustomQuestion("")
+      setAnswer("")
     } else {
       console.error("Failed to add pair");
     }
 
   }
+
+  const handleQuestionTypeChange = () => {
+    setIsCustomQuestion(!isCustomQuestion);
+    setCustomQuestion("");
+    setSelectedQuestion("");
+  };
+
 
   const getRecommendation = async () => {
   
@@ -92,11 +109,9 @@ function Audition() {
         setRecommended(jsonResponse)
       } else {
         console.error("Recommendation failed");
-      }
-  
-    
+      } 
   }
-
+  
   
   return (
     <div className="flex flex-col h-screen">
@@ -116,8 +131,8 @@ function Audition() {
         <main className="flex-grow overflow-y-auto p-4 bg-white">
           {pairs.map((pair, index) => (
             <div key={index} className="mb-4 p-4 border rounded-lg shadow-sm">
-              <h2 className="text-lg font-bold">Question: {pair.q}</h2>
-              <p className="mt-2">Answer: {pair.a}</p>
+              <h2 className="text-lg font-bold">{pair.q} : السؤال</h2>
+              <p className="mt-2">{pair.a} : الجواب</p>
             </div>
           ))}
         </main>
@@ -136,14 +151,71 @@ function Audition() {
         </aside>
       </div>
       <footer className="bg-gray-800 p-4 fixed bottom-0 w-3/4">
+      <form onSubmit={add} className="space-y-4">
+        <div className="flex items-center space-x-4">
+          {isCustomQuestion ? (
+            <Input
+              type="text"
+              placeholder="اكتب سؤالك"
+              value={customQuestion}
+              onChange={(e) => setCustomQuestion(e.target.value)}
+              className="flex-grow mb-1"
+            />
+          ) : (
+            <div className="flex flex-grow space-x-2">
+              {selectedQuestion.includes("___") && (
+                <Input
+                  type="text"
+                  placeholder="املأ الفراغ"
+                  value={gapFill}
+                  onChange={(e) => setGapFill(e.target.value)}
+                  className="flex-grow mb-1"
+                />
+              )}
+              <select
+                value={selectedQuestion}
+                onChange={(e) => setSelectedQuestion(e.target.value)}
+                className="flex-grow p-2 bg-white text-black rounded"
+              >
+                <option value="" disabled>
+                حدد سؤالاً محدد مسبقًا
+                </option>
+                {predefinedQuestions.map((question, index) => (
+                  <option key={index} value={question}>
+                    {question}
+                  </option>
+                ))}
+              </select>
+            </div>
+          )}
+          <Button onClick={handleQuestionTypeChange} type="button">
+            {isCustomQuestion ? "استخدم سؤال محدد مسبقًا" : "استخدم سؤال خاص"}
+          </Button>
+        </div>
+        <div>
+          <Input
+            type="text"
+            placeholder="أكتب أجابتك"
+            value={answer}
+            onChange={(e) => setAnswer(e.target.value)}
+            className="flex-grow mb-1"
+          />
+        </div>
+        <Button type="submit" className="flex-grow mb-1">
+        تأكيد
+        </Button>
+      </form>
+    </footer>
+   { /*  <footer className="bg-gray-800 p-4 fixed bottom-0 w-3/4">
         <form onSubmit={add} >
           <Input id="q" placeholder="سؤال" ref={q} className="flex-grow mb-1" />
           <Input id="a" placeholder="جواب" ref={a} className="flex-grow mb-1" />
           <Button type="submit">تأكيد</Button>
         </form>
-      </footer>
+      </footer>*/}
     </div>
   );
 }
+
 
 export default Audition;
