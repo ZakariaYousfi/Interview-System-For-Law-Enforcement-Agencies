@@ -26,19 +26,19 @@ model = SentenceTransformer('sentence-transformers/all-MiniLM-L6-v2')
 
 # ============================== 
 # ====== Uni-Grams Models ======
-
-t_model = gensim.models.Word2Vec.load('./models/full_uni_cbow_100_twitter.mdl')
+"""
+t_model = gensim.models.Word2Vec.load('./models/full_uni_cbow_300_twitter.mdl')
 
 father = clean_str(u'ابي')
 son = clean_str(u'اخي')
-"""
+
 print("الكلمة: " + token)
 most_similar = t_model.wv.most_similar( token, topn=10 )
 for term, score in most_similar:
     print(term, score)
 # get a word vector
 word_vector = t_model.wv[ token ]
-"""
+
 father_vector = t_model.wv[ father ]
 son_vector = t_model.wv[ son ]
 
@@ -46,7 +46,7 @@ relations = {
     "ابي": father_vector,
     "اخي": son_vector,
 }
-
+"""
 app = Flask(__name__)
 CORS(app, support_credentials=True)
 
@@ -86,7 +86,7 @@ def auth_page(opt=None):
     content = request.get_json(silent=True)
     if(content["username"] == "abcd" and content["password"] == "abcdabcd" ):
         login = True
-        resp = Response(json.dumps({"name" : "lolmaster"}))
+        resp = Response(json.dumps({"name" : "محمد لمين", "affaires": [{"id":1, "type": "سرقة","description": "سرقة محل باب الواد"}, {"id": 2,"type": "قتل", "description":"جريمة قتل في الملعب"}], "currentAffaire": 0}))
         resp.headers["Access-Control-Expose-Headers"] = "*"
         resp.status = 200
     else:

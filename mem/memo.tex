@@ -1,0 +1,1838 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\author{}
+\date{}
+
+\begin{document}
+
+\section{Liste des acronymes}\label{liste-des-acronymes}
+
+KB knowledge base.
+
+NER Named Entity Recognition.
+
+NLP Natural Language Processing.
+
+TALN Traitement automatique du language natuelle.
+
+IA Intelligence artificielle.
+
+RE Relation Extraction.
+
+\section{}\label{section}
+
+\section{}\label{section-1}
+
+\section{}\label{section-2}
+
+\section{}\label{section-3}
+
+\section{}\label{section-4}
+
+\section{}\label{section-5}
+
+\section{}\label{section-6}
+
+\section{}\label{section-7}
+
+\section{}\label{section-8}
+
+\section{}\label{section-9}
+
+\section{}\label{section-10}
+
+\section{}\label{section-11}
+
+\section{Introduction Générale :}\label{introduction-guxe9nuxe9rale}
+
+\subsubsection{\texorpdfstring{\textbf{Contexte}}{Contexte}}\label{contexte}
+
+Dans les agences de maintien de l\textquotesingle ordre, la collecte et
+l\textquotesingle analyse précises des déclarations des suspects, des
+témoins et des victimes sont cruciales pour mener à bien les enquêtes
+criminelles. Les entretiens et les interrogatoires jouent un rôle
+central dans ces enquêtes, fournissant des informations essentielles qui
+peuvent déterminer la direction de l\textquotesingle enquête et
+influencer les décisions judiciaires. Cependant, la gestion de ces
+informations présente de nombreux défis, notamment la détection des
+contradictions dans les déclarations et la formulation de questions
+pertinentes pour obtenir des informations supplémentaires.
+
+Traditionnellement, les enquêteurs prennent des notes manuelles ou
+enregistrent des conversations, ce qui nécessite un effort considérable
+pour analyser et comparer les informations recueillies. Cette approche
+peut être sujette à des erreurs humaines et à des pertes
+d\textquotesingle informations importantes. De plus, les enquêteurs
+peuvent rencontrer des difficultés lorsqu\textquotesingle ils sont
+confrontés à des déclarations ambiguës ou incohérentes, et
+lorsqu\textquotesingle ils doivent formuler des questions de suivi pour
+clarifier ou approfondir les réponses obtenues.
+
+Avec l\textquotesingle avènement des technologies
+d\textquotesingle intelligence artificielle (IA) et du traitement
+automatique du langage naturel (TALN), il est désormais possible de
+développer des systèmes automatisés capables d\textquotesingle analyser
+les conversations de manière plus efficace et précise. Ces technologies
+peuvent aider à détecter les contradictions dans les déclarations, en
+comparant les nouvelles informations avec les données existantes dans le
+système. Elles peuvent également fournir des recommandations de
+questions basées sur le contexte de l\textquotesingle entretien, aidant
+ainsi les enquêteurs à obtenir des informations plus complètes et
+cohérentes.
+
+Des systèmes similaires ont été développés dans divers domaines du
+maintien de l\textquotesingle ordre, tels que la détection de la fraude,
+la reconnaissance faciale et l\textquotesingle analyse prédictive du
+crime\footnote{https://thideai.com/ai-in-law-enforcement-predictive-policing-and-crime-analysis/}
+\footnote{https://www.police1.com/iacp/articles/advancing-policing-through-ai-insights-from-the-global-law-enforcement-community-3SzYuRViccy8vwQ3/}.
+Ces systèmes montrent le potentiel de l\textquotesingle IA à transformer
+les pratiques d\textquotesingle enquête en automatisant des tâches
+complexes et en fournissant des analyses avancées. Cependant, un système
+spécifiquement conçu pour enregistrer les conversations
+d\textquotesingle enquête, détecter les contradictions et recommander
+des questions en temps réel représente une avancée significative dans ce
+domaine.
+
+\textbf{Contribution}
+
+Ce projet vise à combler cette lacune en fournissant un outil intégré et
+automatisé pour les enquêteurs. En exploitant les capacités des
+technologies d\textquotesingle IA et de TALN, le système proposé
+améliorera la précision et l\textquotesingle efficacité des enquêtes,
+tout en réduisant la charge cognitive des enquêteurs. Cette initiative
+s\textquotesingle inscrit dans une tendance plus large
+d\textquotesingle adoption de technologies avancées par les agences de
+maintien de l\textquotesingle ordre pour améliorer leurs capacités
+d\textquotesingle investigation et garantir une justice plus efficace et
+équitable.
+
+\textbf{Structure de la mémoire}
+
+Cette thèse est structurée pour fournir une exploration complète du
+développement et de la mise en œuvre d\textquotesingle un système basé
+sur l\textquotesingle IA pour l\textquotesingle analyse des entretiens
+des forces de l\textquotesingle ordre. Les chapitres suivants décrivent
+la progression de cette entreprise de recherche, abordant chacun des
+aspects cruciaux de la conception du système, de ses fonctionnalités, de
+son évaluation et de ses implications futures. La structure détaillée
+est la suivante :
+
+\textbf{Chapitre 1 : Présentation de l'organisme d'accueil et
+Généralités}
+
+\begin{itemize}
+\item
+  Dans ce chapitre, nous présenterons brièvement
+  l\textquotesingle organisme d\textquotesingle accueil, son rôle et sa
+  mission dans le contexte plus large de son domaine
+  d\textquotesingle activité. Nous aborderons également quelques
+  généralités sur le domaine.
+\end{itemize}
+
+\textbf{Chapitre 2 : État de l'art}
+
+\begin{itemize}
+\item
+  Ce chapitre offre une exploration approfondie de la littérature
+  pertinente, comprenant une introduction au Traitement du Langage
+  Naturel (NLP), ses différentes tâches, ainsi qu\textquotesingle une
+  discussion sur les lacunes de la recherche actuelle.
+\end{itemize}
+
+\textbf{Chapitre 3 : Conception}
+
+\begin{itemize}
+\item
+  Où nous décrirons en détail la conception de notre contribution et de
+  notre application.
+\end{itemize}
+
+\textbf{Chapitre 4 : Implémentation et évaluations}
+
+\begin{itemize}
+\item
+  Où nous aborderons les aspects techniques de la mise en œuvre de notre
+  système, ainsi que les évaluations réalisées.
+\end{itemize}
+
+\textbf{Conclusion générale}
+
+\begin{itemize}
+\item
+  La thèse se termine par un résumé des contributions, des discussions
+  sur les limitations et des suggestions pour les orientations futures
+  de la recherche, encapsulant la signification et le potentiel du
+  système développé.
+\end{itemize}
+
+\section{Table of Contents}\label{table-of-contents}
+
+\hyperref[liste-des-acronymes]{Introduction Générale :
+\hyperref[liste-des-acronymes]{1}}
+
+\hyperref[contexte]{\textbf{Contexte} \hyperref[contexte]{1}}
+
+\hyperref[chapitre-1-pruxe9sentation-de-lorganisme-daccueil-et-guxe9nuxe9ralituxe9s]{Chapitre
+1 : Présentation de l'organisme d'accueil et Généralités
+\hyperref[chapitre-1-pruxe9sentation-de-lorganisme-daccueil-et-guxe9nuxe9ralituxe9s]{5}}
+
+\hyperref[pruxe9sentation-de-lorganisme-daccueil]{1 Présentation de
+l'organisme d'accueil
+\hyperref[pruxe9sentation-de-lorganisme-daccueil]{5}}
+
+\hyperref[introduction]{1.1.1 Introduction \hyperref[introduction]{5}}
+
+\hyperref[la-gendarmerie-nationale]{1.1.2 La Gendarmerie Nationale
+\hyperref[la-gendarmerie-nationale]{5}}
+
+\hyperref[incc-gn]{1.1.3 INCC-GN \hyperref[incc-gn]{5}}
+
+\hyperref[guxe9nuxe9ralituxe9s]{1.2 Généralités
+\hyperref[guxe9nuxe9ralituxe9s]{6}}
+
+\hyperref[introduction-1]{1.2.1 Introduction
+\hyperref[introduction-1]{6}}
+
+\hyperref[crime]{1.2.2 Crime~: \hyperref[crime]{6}}
+
+\hyperref[enquuxeate]{1.2.3 Enquête~: \hyperref[enquuxeate]{6}}
+
+\hyperref[audition]{1.2.4 Audition \hyperref[audition]{7}}
+
+\hyperref[contradiction]{1.2.5 Contradiction
+\hyperref[contradiction]{7}}
+
+\hyperref[recommandation-de-questions]{1.2.6 Recommandation de questions
+\hyperref[recommandation-de-questions]{7}}
+
+\hyperref[chapitre-2-uxe9tat-de-lart]{Chapitre 2~: État de l'art
+\hyperref[chapitre-2-uxe9tat-de-lart]{7}}
+
+\hyperref[traitement-automatique-du-langage-naturel]{2.1 Traitement
+automatique du langage naturel
+\hyperref[traitement-automatique-du-langage-naturel]{7}}
+
+\hyperref[repruxe9sentation-du-texte]{2.2 Représentation du texte
+\hyperref[repruxe9sentation-du-texte]{8}}
+
+\hyperref[_Toc167600292]{2.2.1 Représentation textuelle discrète
+\hyperref[_Toc167600292]{8}}
+
+\hyperref[repruxe9sentation-textuelle-continue]{2.2.2 Représentation
+textuelle continue \hyperref[repruxe9sentation-textuelle-continue]{9}}
+
+\hyperref[ruxe9seaux-de-neurones-ruxe9currents]{2.2.3 Réseaux de
+Neurones Récurrents \hyperref[ruxe9seaux-de-neurones-ruxe9currents]{10}}
+
+\hyperref[lstm-long-short-term-memory]{2.3.4 LSTM:
+Long-Short-Term-Memory \hyperref[lstm-long-short-term-memory]{12}}
+
+\hyperref[structure-des-cellules-lstm]{2.3.5 Transformers
+\hyperref[structure-des-cellules-lstm]{13}}
+
+\hyperref[encodeur-et-duxe9codeur]{2.3.6 BERT
+\hyperref[encodeur-et-duxe9codeur]{15}}
+
+\hyperref[les-diffuxe9rentes-taches-de-nlp]{2.3 Les différentes taches
+de NLP \hyperref[les-diffuxe9rentes-taches-de-nlp]{17}}
+
+\hyperref[reconnaissance-dentituxe9s-nommuxe9es]{2.3.1 Reconnaissance
+d'entités nommées \hyperref[reconnaissance-dentituxe9s-nommuxe9es]{17}}
+
+\hyperref[duxe9finition]{2.3.1.1 Définition
+\hyperref[duxe9finition]{17}}
+
+\hyperref[les-approches-du-ner]{2.3.1.2 Les approches du NER
+\hyperref[les-approches-du-ner]{17}}
+
+\hyperref[classification-de-texte]{2.3.2 Classification de texte
+\hyperref[classification-de-texte]{18}}
+
+\hyperref[extraction-de-relations]{2.3.3 Extraction de relations
+\hyperref[extraction-de-relations]{18}}
+
+\hyperref[approche-de-supervision-distante]{2.3.4 Similarité Des Textes
+\hyperref[approche-de-supervision-distante]{19}}
+
+\hyperref[travaux-connexes]{2.4 \textbf{Travaux Connexes}
+\hyperref[travaux-connexes]{19}}
+
+\hyperref[recherches-dans-la-contradiction]{2.5 Recherches dans la
+Contradiction \hyperref[recherches-dans-la-contradiction]{20}}
+
+\hyperref[systuxe8mes-de-recommandation]{2.6 Systèmes de recommandation
+\hyperref[systuxe8mes-de-recommandation]{20}}
+
+\hyperref[recommandation-des-questions]{2.7 Recommandation des questions
+\hyperref[recommandation-des-questions]{21}}
+
+\hyperref[filtrage-basuxe9-sur-le-contenu-content-based-filtering]{2.8
+Filtrage basé sur le contenu (Content-based filtering)
+\hyperref[filtrage-basuxe9-sur-le-contenu-content-based-filtering]{21}}
+
+\hyperref[chapitre-3-conception]{Chapitre 3~: Conception
+\hyperref[chapitre-3-conception]{21}}
+
+\hyperref[introduction-8]{3.1 Introduction
+\hyperref[introduction-8]{22}}
+
+\hyperref[diagramme-de-cas-dutilisation]{3.2 Diagramme de cas
+d'utilisation \hyperref[diagramme-de-cas-dutilisation]{22}}
+
+\hyperref[diagramme-de-classes]{3.3 Diagramme de classes
+\hyperref[diagramme-de-classes]{22}}
+
+\hyperref[module-de-duxe9tection-de-la-contradiction]{3.4 Module de
+détection de la contradiction
+\hyperref[module-de-duxe9tection-de-la-contradiction]{22}}
+
+\hyperref[module-de-recommandation-des-questions]{3.5 Module de
+recommandation des questions
+\hyperref[module-de-recommandation-des-questions]{23}}
+
+\section{Chapitre 1 : Présentation de l'organisme d'accueil et
+Généralités}\label{chapitre-1-pruxe9sentation-de-lorganisme-daccueil-et-guxe9nuxe9ralituxe9s}
+
+\subsection{1 Présentation de l'organisme
+d'accueil}\label{pruxe9sentation-de-lorganisme-daccueil}
+
+\subsubsection{1.1.1 Introduction}\label{introduction}
+
+Durant cette partie, nous présenterons l'organisme d'accueil au sein de
+laquelle nous avons effectué notre projet, nous parlerons d'abord de la
+gendarmerie nationale ensuite de L'institut Nationale de Criminalistique
+et de Criminologie et la relation entre les deux et nous finirons par
+aborder les besoins de notre organisme d'accueil.
+
+\subsubsection{1.1.2 La Gendarmerie
+Nationale}\label{la-gendarmerie-nationale}
+
+La Gendarmerie nationale d\textquotesingle Algérie est une force de
+sécurité chargée de maintenir l\textquotesingle ordre public,
+d\textquotesingle assurer la sécurité des citoyens et de défendre
+l\textquotesingle intégrité du territoire national. Elle opère sous
+l\textquotesingle autorité du ministère de la Défense nationale et joue
+un rôle crucial dans la protection des populations, la lutte contre la
+criminalité, le contrôle des frontières et la gestion des situations
+d\textquotesingle urgence. La Gendarmerie nationale algérienne est
+reconnue pour son professionnalisme, son engagement et son dévouement
+envers la sécurité et le bien-être des citoyens.
+
+\subsubsection{1.1.3 INCC-GN}\label{incc-gn}
+
+L\textquotesingle Institut National de Criminalistique et de
+Criminologie de la Gendarmerie Nationale (INCC-GN) est une institution
+algérienne spécialisée dans la recherche, l\textquotesingle analyse et
+la résolution des affaires criminelles. Relevant de la Gendarmerie
+nationale, cet institut joue un rôle essentiel dans la lutte contre la
+criminalité en fournissant des expertises scientifiques et techniques
+aux enquêteurs sur le terrain. L\textquotesingle INCC-GN est doté de
+laboratoires modernes équipés des technologies les plus avancées,
+permettant l\textquotesingle analyse des preuves et des indices
+recueillis lors des enquêtes. Son personnel hautement qualifié, composé
+d\textquotesingle experts en criminalistique et en criminologie,
+travailles-en étroite collaboration avec les autorités judiciaires pour
+résoudre les affaires criminelles, apporter des éléments de preuve
+solides devant les tribunaux et contribuer à la sécurité publique. Ces
+missions incluent~:
+
+\begin{itemize}
+\item
+  Réaliser des expertises et examens scientifiques à la requête des
+  magistrats, enquêteurs et autorités habilitées.
+\item
+  Assurer une assistance scientifique aux unités lors des investigations
+  complexes.
+\item
+  Concevoir et réaliser des banques de données, conformément à la loi.
+\item
+  Participer aux études et analyses relatives à la prévention et à la
+  réduction de toute forme de criminalité.
+\item
+  Contribuer à la définition d\textquotesingle une meilleure politique
+  de lutte contre la criminalité.
+\item
+  Initier et mener des travaux de recherche ayant trait à la criminalité
+  en recourant à des technologies de pointe.
+\item
+  Œuvrer au développement de la recherche appliquée et des méthodes
+  d\textquotesingle investigation ayant été jugées efficaces dans les
+  domaines de la criminologie et de la criminalistique sur les plans
+  national et international.\footnote{https://www.mdn.dz/site\_cgn/sommaire/presentation/unit\_spe/incc/incc\_fr.php}
+\end{itemize}
+
+Nous contribuons avec ce projet aux derniers objectifs mentionnés
+ci-dessus.
+
+\includegraphics[width=6.3in,height=3.72986in]{media/image1.png}
+
+\subsection{1.2 Généralités}\label{guxe9nuxe9ralituxe9s}
+
+\subsubsection{1.2.1 Introduction}\label{introduction-1}
+
+Cette partie est un bref aperçu des concepts auxquels notre étude
+s'intéresse notamment l'audition, contradiction, et la recommandation de
+questions. Les sections suivantes rassemblent quelques définitions et
+éléments préliminaires qui sont nécessaires pour la bonne compréhension
+du contenu du mémoire.
+
+\subsubsection{1.2.2 Crime~:}\label{crime}
+
+Un crime, dans son essence la plus fondamentale, est un acte qui viole
+les lois établies par une société donnée. C\textquotesingle est un
+comportement considéré comme répréhensible et interdit par la loi, et
+qui entraîne des conséquences juridiques pour son auteur. Les crimes
+peuvent varier en gravité, allant des infractions mineures telles que le
+vol à l\textquotesingle étalage aux offenses les plus graves comme le
+meurtre ou le viol. Un crime qui a été découvert déclenche une enquête.
+
+\subsubsection{1.2.3 Enquête~:}\label{enquuxeate}
+
+Une enquête est un processus systématique et méthodique visant à
+recueillir des informations, à examiner des preuves et à analyser des
+faits dans le but de découvrir la vérité sur un événement spécifique ou
+une série d\textquotesingle incidents. C\textquotesingle est une
+démarche essentielle dans le domaine de la justice et de la résolution
+de problèmes, utilisée par les autorités légales, les organismes
+d\textquotesingle application de la loi, les entreprises et
+d\textquotesingle autres entités pour élucider des questions complexes
+et prendre des décisions éclairées.
+
+Le processus d\textquotesingle enquête implique généralement plusieurs
+étapes, notamment la collecte initiale d\textquotesingle informations,
+la planification de la méthode d\textquotesingle investigation, la
+collecte de preuves, l\textquotesingle analyse des données recueillies,
+la formulation de conclusions et, le cas échéant, la présentation des
+résultats devant un tribunal ou une autre instance compétente.
+
+\subsubsection{1.2.4 Audition}\label{audition}
+
+L\textquotesingle audition joue un rôle crucial dans le domaine de la
+sécurité publique, notamment dans le cadre des enquêtes judiciaires et
+des interventions policières. Elle permet de recueillir des informations
+essentielles auprès des témoins, des suspects et des victimes,
+contribuant ainsi à la résolution des affaires criminelles et à la
+protection des citoyens.
+
+Les professionnels de la sécurité publique, tels que les officiers de
+police judiciaire, doivent posséder des compétences avancées en
+techniques d\textquotesingle interrogatoire pour obtenir des
+déclarations précises et fiables. L\textquotesingle audition efficace
+repose sur la capacité à poser des questions pertinentes, à détecter les
+contradictions et à évaluer la crédibilité des informations fournies.
+
+\subsubsection{1.2.5 Contradiction}\label{contradiction}
+
+Une contradiction se produit lorsqu\textquotesingle il existe une
+incohérence ou un conflit entre deux assertions, déclarations ou faits.
+C\textquotesingle est un phénomène qui peut survenir dans divers
+contextes, que ce soit dans des déclarations verbales, des documents
+écrits, des témoignages ou des arguments logiques. La détection et la
+compréhension des contradictions sont essentielles dans de nombreux
+domaines, notamment le droit, la recherche, la communication et la
+résolution de problèmes.
+
+Dans un contexte juridique, la contradiction peut être utilisée pour
+remettre en question la crédibilité d\textquotesingle un témoignage ou
+d\textquotesingle une preuve présentée devant un tribunal. Les
+enquêteurs peuvent chercher à identifier des contradictions dans les
+déclarations des témoins ou les éléments de preuve présentés par la
+partie adverse afin de discréditer leur argumentation et de renforcer
+leur propre cas.
+
+\subsubsection{1.2.6 Recommandation de
+questions}\label{recommandation-de-questions}
+
+La recommandation de questions est un processus visant à proposer des
+interrogations pertinentes et efficaces dans le cadre
+d\textquotesingle une enquête, d\textquotesingle un entretien ou
+d\textquotesingle une interaction. Cette pratique trouve son utilité
+dans divers domaines, notamment dans le cadre juridique, médical,
+professionnel et académique.
+
+Dans le domaine juridique, la recommandation de questions est souvent
+utilisée lors des interrogatoires de témoins ou de suspects. Les
+enquêteurs peuvent bénéficier de recommandations basées sur des analyses
+de cas similaires, des modèles de comportement ou des profils
+psychologiques pour formuler des questions pertinentes et stratégiques
+afin de faire progresser l\textquotesingle enquête et obtenir des
+informations cruciales.
+
+\section{Chapitre 2~: État de l'art}\label{chapitre-2-uxe9tat-de-lart}
+
+Dans ce chapitre, nous allons présenter les concepts de base liés à
+notre travail,
+
+\subsection{2.1 Traitement automatique du langage
+naturel}\label{traitement-automatique-du-langage-naturel}
+
+Le traitement automatique du langage naturel (TALN), ou Natural Language
+Processing (NLP) en anglais, est un domaine essentiel de
+l\textquotesingle intelligence artificielle qui vise à permettre aux
+machines de comprendre et d\textquotesingle interpréter le langage
+humain. Cette discipline repose sur la combinaison de la linguistique
+informatique, des techniques statistiques, et des algorithmes
+d\textquotesingle apprentissage automatique et
+d\textquotesingle apprentissage profond\footnote{LGoldberg, Y. (2016).
+  "A Primer on Neural Network Models for Natural Language Processing."
+  Journal of Artificial Intelligence Research, 57, 345-420.}.
+
+Les technologies NLP permettent aux ordinateurs de traiter le texte et
+les données vocales de manière à extraire des informations
+significatives, comme le contexte, l\textquotesingle intention et les
+émotions\footnote{Jurafsky, D., \& Martin, J. H. (2019). "Speech and
+  Language Processing." Pearson.}. Grâce à ces capacités, le NLP trouve
+des applications variées dans de nombreux domaines.
+
+Par exemple, les systèmes de traduction automatique, les assistants
+virtuels comme Siri et Alexa, et les chatbots utilisent des techniques
+de NLP pour interagir avec les utilisateurs de manière fluide et
+naturelle. De plus, les entreprises emploient le NLP pour analyser les
+avis des clients, détecter le spam dans les emails, et identifier les
+entités nommées dans les documents.
+
+Le traitement du langage naturel joue un rôle crucial dans
+l\textquotesingle avancement de diverses technologies contemporaines.
+Voici quelques exemples illustratifs :
+
+• Modèles de langage comme GPT, chatbots
+
+• Reconnaissances vocales
+
+• Traduction automatique, analyse des sentiments
+
+\subsection{2.2 Représentation du
+texte}\label{repruxe9sentation-du-texte}
+
+\phantomsection\label{_Toc167600292}{}Pour que les machines puissent
+comprendre et analyser les modèles linguistiques, il est essentiel de
+convertir les mots en nombres. Ce processus, appelé représentation
+textuelle, est fondamental pour la plupart des tâches de traitement du
+langage naturel (NLP). La manière dont le texte est représenté influence
+grandement les performances des modèles d\textquotesingle apprentissage
+automatique. On distingue deux grandes catégories de représentations
+textuelles :
+
+\begin{itemize}
+\item
+  Représentation textuelle discrète
+\item
+  Représentation textuelle continue
+\end{itemize}
+
+\subsubsection{2.2.1 Représentation textuelle
+discrète}\label{repruxe9sentation-textuelle-discruxe8te}
+
+Dans ce type de représentation, les mots sont représentés par des
+indices correspondant à leur position dans un dictionnaire dérivé
+d\textquotesingle un corpus plus large. Les méthodes suivantes sont
+couramment utilisées :
+
+\begin{itemize}
+\item
+  One-Hot encoding
+\item
+  Bag of Words
+\item
+  CountVectorizer
+\item
+  TF-IDF
+\end{itemize}
+
+\paragraph{2.2.1.1 One-Hot encoding}\label{one-hot-encoding}
+
+Cette méthode représente chaque mot par un vecteur binaire de la taille
+du vocabulaire, avec un seul élément à 1 et tous les autres à 0.
+
+Exemple : Pour le vocabulaire {[}"chat", "chien", "oiseau"{]}, "chien"
+est représenté par {[}0, 1, 0{]}.
+
+Avantage : Simple à comprendre et implémenter.
+
+Limite : Produit des vecteurs de grande taille pour les grands
+vocabulaires et ne capture pas les relations sémantiques entre les mots.
+
+\paragraph{2.2.1.2 Bag of words}\label{bag-of-words}
+
+La représentation par sac de mots, comme son nom
+l\textquotesingle indique intuitivement, place les mots dans un « sac »
+et calcule la fréquence d\textquotesingle apparition de chaque mot. Elle
+ne prend pas en compte l\textquotesingle ordre des mots ou les
+informations lexicales pour la représentation du texte.
+
+L\textquotesingle intuition derrière la représentation par sac de mots
+est que des documents ayant des mots similaires sont similaires,
+indépendamment de la position des mots.
+
+Avantage : Simple à implémenter et efficace pour les petites tâches.
+
+Limite : Ne capture pas l\textquotesingle ordre des mots ni les
+relations sémantiques.
+
+\paragraph{2.2.1.3 CountVectorizer}\label{countvectorizer}
+
+Le CountVectorizer est une extension de BoW, où chaque document est
+représenté par un vecteur contenant le nombre de fois que chaque mot
+apparaît.
+
+Exemple : Pour les phrases "le chat dort" et "le chien dort", "le chat
+dort" pourrait être représenté par {[}1, 1, 1, 0{]} en utilisant le même
+vocabulaire.
+
+Avantage : Simple et intuitif, permet de quantifier
+l\textquotesingle importance des mots.
+
+Limite : Ne prend pas en compte la fréquence relative des mots dans
+l\textquotesingle ensemble des documents.
+
+\paragraph{2.2.1.1 TF-IDF}\label{tf-idf}
+
+Le TF-IDF (Term Frequency-Inverse Document Frequency) pondère chaque mot
+en fonction de sa fréquence dans le document et de sa rareté dans
+l\textquotesingle ensemble des documents. Il combine deux mesures pour
+évaluer l\textquotesingle importance d\textquotesingle un mot dans un
+document :
+
+\[TFIDF(m,\ d)\  = \ TF(m,\ d)\ *\ IDF(m)\]
+
+\begin{itemize}
+\item
+  \textbf{TF (Term Frequency)} : la fréquence
+  d\textquotesingle apparition d\textquotesingle un mot \textbf{m} dans
+  un document \textbf{d}.
+\item
+  \textbf{IDF (Inverse Document Frequency)} : la mesure de la rareté
+  d\textquotesingle un mot dans l\textquotesingle ensemble des
+  documents, calculée comme suit :
+\end{itemize}
+
+\[IDF(m) = log(\frac{N}{df(m)})\]
+
+Où \textbf{N} est le nombre total de documents et \textbf{df(m)} le
+nombre de documents contenant le mot \textbf{m}.
+
+Avantage : Réduit l\textquotesingle impact des mots courants et met en
+valeur les mots informatifs.
+
+Limite : Les vecteurs restent de grande dimension et la méthode ne
+capture pas les relations contextuelles entre les mots.
+
+\subsubsection{2.2.2 Représentation textuelle
+continue}\label{repruxe9sentation-textuelle-continue}
+
+La représentation continue, ou distribuée, d\textquotesingle un texte se
+produit lorsque la représentation d\textquotesingle un mot dépend
+d\textquotesingle autres mots et n\textquotesingle est pas mutuellement
+exclusive. Les configurations des mots reflètent diverses métriques et
+concepts présents dans les données. Ainsi, les informations relatives à
+un mot sont réparties le long du vecteur qui le représente. Cela
+contraste avec la représentation discrète, où chaque mot est considéré
+comme unique et indépendant des autres.
+
+Les méthodes courantes de représentation continue incluent :
+
+\begin{itemize}
+\item
+  Matrices de cooccurrence
+\item
+  Word2Vec
+\item
+  GloVe
+\end{itemize}
+
+\paragraph{2.2.2.1 Matrice de cooccurrence
+:}\label{matrice-de-cooccurrence}
+
+\paragraph{\texorpdfstring{Cette représentation analyse la proximité des
+entités entre elles au sein d\textquotesingle un texte. Une entité peut
+être un seul mot, un bi-gramme (séquence de deux mots), ou même une
+phrase, bien que l\textquotesingle utilisation d\textquotesingle un seul
+mot soit la méthode la plus courante pour calculer la matrice. En
+examinant les co-occurrences, cette matrice permet de dévoiler les
+associations et les relations entre différents mots dans un corpus. Cela
+nous aide à comprendre comment les mots sont utilisés ensemble et à
+identifier les tendances et les motifs linguistiques présents dans le
+texte.
+}{Cette représentation analyse la proximité des entités entre elles au sein d\textquotesingle un texte. Une entité peut être un seul mot, un bi-gramme (séquence de deux mots), ou même une phrase, bien que l\textquotesingle utilisation d\textquotesingle un seul mot soit la méthode la plus courante pour calculer la matrice. En examinant les co-occurrences, cette matrice permet de dévoiler les associations et les relations entre différents mots dans un corpus. Cela nous aide à comprendre comment les mots sont utilisés ensemble et à identifier les tendances et les motifs linguistiques présents dans le texte. }}\label{cette-repruxe9sentation-analyse-la-proximituxe9-des-entituxe9s-entre-elles-au-sein-dun-texte.-une-entituxe9-peut-uxeatre-un-seul-mot-un-bi-gramme-suxe9quence-de-deux-mots-ou-muxeame-une-phrase-bien-que-lutilisation-dun-seul-mot-soit-la-muxe9thode-la-plus-courante-pour-calculer-la-matrice.-en-examinant-les-co-occurrences-cette-matrice-permet-de-duxe9voiler-les-associations-et-les-relations-entre-diffuxe9rents-mots-dans-un-corpus.-cela-nous-aide-uxe0-comprendre-comment-les-mots-sont-utilisuxe9s-ensemble-et-uxe0-identifier-les-tendances-et-les-motifs-linguistiques-pruxe9sents-dans-le-texte.}
+
+\paragraph{2.2.2.2 Word2Vec :}\label{word2vec}
+
+Word2Vec est un algorithme de word embedding, qui représente les mots ou
+phrases d'un texte sous forme de vecteurs de nombres réels dans un
+modèle vectoriel. Développé par une équipe de recherche de Google sous
+la direction de Tomas Mikolov\footnote{Tomás Mikolov, Kai Chen, Greg
+  Corrado, and Jeffrey Dean. Efficient estimation of word
+  representations in vector space. In Yoshua Bengio and Yann LeCun,
+  editors, 1st International Conference on Learning Representations,
+  ICLR 2013, Scottsdale, Arizona, USA, May 2-4, 2013, Workshop Track
+  Proceedings, 2013.}, cet algorithme est devenu un outil essentiel dans
+le traitement du langage naturel.
+
+Word2Vec propose deux architectures neuronales principales : CBOW
+(Continuous Bag of Words) et Skip-Gram.
+
+\begin{itemize}
+\item
+  \textbf{CBOW (Continuous Bag of Words)} : Cette méthode tente de
+  prédire un mot en se basant sur son contexte, c'est-à-dire les termes
+  qui l'entourent dans une phrase. Elle est particulièrement efficace
+  avec des ensembles de données plus petits et offre un temps
+  d\textquotesingle entraînement rapide comparé à Skip-Gram.
+\item
+  \textbf{Skip-Gram} : Cette méthode, à l\textquotesingle inverse de
+  CBOW, prédit le contexte à partir du mot cible. Elle tend à mieux
+  fonctionner avec des ensembles de données plus larges, bien qu'elle
+  nécessite un temps d\textquotesingle entraînement plus long.
+\end{itemize}
+
+\paragraph{2.2.2.3 GloVe :}\label{glove}
+
+GloVe (Global Vectors for Word Representation) est un algorithme
+d\textquotesingle embedding qui combine les avantages des méthodes
+basées sur le comptage (comme les matrices de cooccurrence) et des
+méthodes prédictives (comme Word2Vec), le qualifiant ainsi de méthode
+hybride. L\textquotesingle objectif principal de GloVe est de trouver
+des vecteurs de mots qui capturent les relations statistiques globales
+des cooccurrences de mots. L\textquotesingle algorithme
+s\textquotesingle appuie sur la fonction d\textquotesingle objectif
+suivante :
+
+J=i,j=1∑V\hspace{0pt}f(Xij\hspace{0pt})(wi\textsuperscript{T}\hspace{0pt}wj\hspace{0pt}+bi\hspace{0pt}+bj\hspace{0pt}−log(Xij\hspace{0pt}))\textsuperscript{2}
+
+où :
+
+\begin{itemize}
+\item
+  Xij représente le nombre de cooccurrences entre le mot i et le mot j
+\item
+  wi wj sont les vecteurs de mots,
+\item
+  bi et bj\hspace{0pt} sont les biais associés à chaque mot,
+\item
+  f est une fonction de pondération.
+\end{itemize}
+
+Ainsi, GloVe construit des vecteurs de mots wi et wj\hspace{0pt} qui
+respectent les cooccurrences observées Xij, une statistique calculée
+globalement à partir de la matrice de cooccurrence.
+
+\subsubsection{2.2.3 Réseaux de Neurones
+Récurrents}\label{ruxe9seaux-de-neurones-ruxe9currents}
+
+\subsubsection{2.2.3.1 Introduction}\label{introduction-2}
+
+Les réseaux de neurones récurrents (RNN) sont une architecture de réseau
+de neurones spécialement conçue pour traiter des données séquentielles
+telles que le texte, l\textquotesingle audio, et plus encore.
+Contrairement aux réseaux de neurones classiques, qui traitent chaque
+donnée indépendamment, les RNN conservent une "mémoire" des états
+précédents. À chaque nouvelle entrée, les RNN concatènent cette entrée
+avec l\textquotesingle état précédent, ce qui permet au réseau
+d\textquotesingle apprendre et de comprendre le contexte global, comme
+le contexte d\textquotesingle une phrase ou d\textquotesingle un extrait
+audio, et ainsi de prédire le mot suivant.
+
+Voici un exemple de~la structure d'un réseau de neurones récurrent :
+
+\includegraphics[width=6.3in,height=1.65486in]{media/image2.webp}
+
+\subsubsection{2.2.3.2 Fonctionnement des
+RNN}\label{fonctionnement-des-rnn}
+
+L\textquotesingle élément clé des RNN réside dans la structure de leurs
+cellules et la concaténation du vecteur d\textquotesingle état précédent
+avec les nouvelles données en entrée. Cette capacité de mémoire est
+illustrée par un vecteur h\textsubscript{i} qui représente
+l\textquotesingle itération en cours et conserve
+l\textquotesingle information nécessaire pour les étapes suivantes.
+
+\subsubsection{2.2.3.3 Limites des RNN
+Classiques}\label{limites-des-rnn-classiques}
+
+\textbf{Problème de Mémoire à Long Terme}
+
+Un des principaux défis des RNN est la gestion de la mémoire à long
+terme. Prenons l\textquotesingle exemple d\textquotesingle une phrase
+complexe : "Unix est un système d'exploitation, il fut créé par Ken
+Thomson et Dennis Ritchie, ces deux personnages sont des légendes dans
+le domaine de l'informatique très peu reconnues par la nouvelle
+génération. Sans eux, le monde ne serait peut-être pas celui qu'il est
+aujourd'hui. Linux, un autre système d'exploitation apparu en 1991, est
+basé sur ****." Pour prédire "Unix" à la fin, le modèle doit se souvenir
+que "Unix est un système d'exploitation" mentionné au début, une tâche
+difficile pour un RNN classique.
+
+\textbf{Problème de Parallélisation}
+
+Les RNN traitant les données de manière séquentielle, leur entraînement
+ne peut pas tirer pleinement parti des optimisations matérielles et
+logicielles pour la parallélisation, ce qui ralentit considérablement
+leur processus d'apprentissage.
+
+Pour surmonter ces limitations, des unités récurrentes plus complexes,
+telles que les cellules "gated" comme les LSTM (Long Short-Term Memory)
+et les GRU (Gated Recurrent Units), ont été développées. Ces cellules
+améliorent la gestion des flux de données et filtrent les informations
+pour ne conserver que les plus pertinentes.
+
+\subsubsection{2.3.4 LSTM:
+Long-Short-Term-Memory}\label{lstm-long-short-term-memory}
+
+\subsubsection{2.3.4.1 Introduction}\label{introduction-3}
+
+Les LSTM (Long Short-Term Memory) ont été créés pour résoudre le
+problème de la mémoire à long terme rencontré par les RNN classiques.
+Ces réseaux utilisent des cellules mémoire plus complexes, appelées
+"gated cells", qui contrôlent le flux de données. Une cellule LSTM se
+compose de trois états d\textquotesingle entrée/sortie et de trois
+portes internes, comme illustré
+ci-dessous.\includegraphics[width=6.3in,height=4.53542in]{media/image3.png}
+
+\subsubsection{2.3.4.2 Structure des Cellules
+LSTM}\label{structure-des-cellules-lstm}
+
+Les cellules LSTM se distinguent par leur capacité à retenir et à
+oublier des informations de manière sélective à travers trois types de
+portes : la porte d\textquotesingle oubli (forget gate), la porte
+d\textquotesingle entrée (input gate) et la porte de sortie (Output
+gate). Chaque porte joue un rôle crucial dans la gestion des données à
+chaque étape du traitement séquentiel.
+
+\textbf{États de la Cellule}
+
+\begin{itemize}
+\item
+  \textbf{Cell state}: Il s\textquotesingle agit de
+  l\textquotesingle état de la cellule qui agrège les données de tous
+  les états précédents. C\textquotesingle est ici que se trouve la
+  "mémoire" à long terme du LSTM.
+\item
+  \textbf{Hidden state}: Cet état encode la caractérisation de
+  l\textquotesingle entrée précédente. Il est utilisé pour la sortie
+  actuelle et également passé à la prochaine étape temporelle.
+\item
+  \textbf{Current input}: C\textquotesingle est l\textquotesingle entrée
+  actuelle, par exemple, un mot dans une phrase pour le traitement de
+  texte.
+\end{itemize}
+
+\textbf{Portes des Cellules}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  \textbf{Porte d\textquotesingle Oubli (Forget Gate)}:
+
+  \begin{itemize}
+  \item
+    La porte d\textquotesingle oubli décide quelles informations de
+    l\textquotesingle état de la cellule doivent être oubliées. Cela se
+    fait via une fonction sigmoïde suivie d\textquotesingle une
+    multiplication pointwise.
+  \item
+    Équation : ft=σ(Wf⋅{[}ht−1,xt{]}+bf)f\_t = \textbackslash sigma(W\_f
+    \textbackslash cdot {[}h\_\{t-1\}, x\_t{]} +
+    b\_f)ft\hspace{0pt}=σ(Wf\hspace{0pt}⋅{[}ht−1\hspace{0pt},xt\hspace{0pt}{]}+bf\hspace{0pt})
+
+    \begin{itemize}
+    \item
+      ftf\_tft\hspace{0pt}: Sortie de la porte d\textquotesingle oubli.
+    \item
+      WfW\_fWf\hspace{0pt}: Poids de la porte d\textquotesingle oubli.
+    \item
+      ht−1h\_\{t-1\}ht−1\hspace{0pt}: Sortie du LSTM précédent (à
+      l\textquotesingle étape t−1t-1t−1).
+    \item
+      xtx\_txt\hspace{0pt}: Entrée à l\textquotesingle état présent.
+    \item
+      bfb\_fbf\hspace{0pt}: Biais de la porte d\textquotesingle oubli.
+    \end{itemize}
+  \end{itemize}
+\item
+  \textbf{Porte d\textquotesingle Entrée (Input Gate)}:
+
+  \begin{itemize}
+  \item
+    La porte d\textquotesingle entrée sélectionne les nouvelles
+    informations à ajouter à l\textquotesingle état de la cellule. Elle
+    utilise une combinaison de fonction sigmoïde et tanh pour ajouter
+    les informations pertinentes à l\textquotesingle état de la cellule.
+  \item
+    Équation : it=σ(Wi⋅{[}ht−1,xt{]}+bi)i\_t = \textbackslash sigma(W\_i
+    \textbackslash cdot {[}h\_\{t-1\}, x\_t{]} +
+    b\_i)it\hspace{0pt}=σ(Wi\hspace{0pt}⋅{[}ht−1\hspace{0pt},xt\hspace{0pt}{]}+bi\hspace{0pt})
+
+    \begin{itemize}
+    \item
+      iti\_tit\hspace{0pt}: Sortie de la porte d\textquotesingle entrée.
+    \item
+      WiW\_iWi\hspace{0pt}: Poids de la porte d\textquotesingle entrée.
+    \item
+      bib\_ibi\hspace{0pt}: Biais de la porte d\textquotesingle entrée.
+    \end{itemize}
+  \end{itemize}
+\item
+  \textbf{Porte de Sortie (Output Gate)}:
+
+  \begin{itemize}
+  \item
+    La porte de sortie décide quelles informations de
+    l\textquotesingle état de la cellule vont influencer la sortie à la
+    prochaine étape. Elle combine les informations des portes
+    précédentes pour former la sortie "hidden", utilisée soit comme
+    prochaine entrée hth\_tht\hspace{0pt}, soit pour effectuer une
+    prédiction yty\_tyt\hspace{0pt}.
+  \item
+    Équation : ot=σ(Wo⋅{[}ht−1,xt{]}+bo)o\_t = \textbackslash sigma(W\_o
+    \textbackslash cdot {[}h\_\{t-1\}, x\_t{]} +
+    b\_o)ot\hspace{0pt}=σ(Wo\hspace{0pt}⋅{[}ht−1\hspace{0pt},xt\hspace{0pt}{]}+bo\hspace{0pt})
+
+    \begin{itemize}
+    \item
+      oto\_tot\hspace{0pt}: Sortie de la porte de sortie.
+    \item
+      WoW\_oWo\hspace{0pt}: Poids de la porte de sortie.
+    \item
+      bob\_obo\hspace{0pt}: Biais de la porte de sortie.
+    \end{itemize}
+  \end{itemize}
+\end{enumerate}
+
+Les LSTM permettent de retenir des informations pertinentes sur de
+longues séquences de données grâce à leurs portes intelligentes. Elles
+filtrent les informations et maintiennent celles qui sont cruciales pour
+des prédictions précises. La combinaison des états de la cellule et des
+portes permet aux LSTM de surmonter les limitations des RNN classiques,
+particulièrement en ce qui concerne la mémoire à long terme et la
+parallélisation des données.
+
+\subsubsection{}\label{section-12}
+
+\subsubsection{2.3.5 Transformers}\label{transformers}
+
+\subsubsection{2.3.5.1 Introduction}\label{introduction-4}
+
+Le Transformer, une innovation majeure dans le domaine de
+l\textquotesingle apprentissage profond, a été dévoilé en 2017 dans
+l\textquotesingle essai "Attention is all you need"\footnote{Ashish
+  Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones,
+
+  Aidan N. Gomez, Lukasz Kaiser, and Illia Polosukhin. Attention is all
+  you need.
+
+  In Isabelle Guyon, Ulrike von Luxburg, Samy Bengio, Hanna M. Wallach,
+  Rob
+
+  Fergus, S. V. N. Vishwanathan, and Roman Garnett, editors, Advances in
+  Neu-
+
+  ral Information Processing Systems 30: Annual Conference on Neural
+  Informa-
+
+  tion Processing Systems 2017, December 4-9, 2017, Long Beach, CA, USA,
+  pages
+
+  5998--6008, 2017.}. Conçu par une équipe de chercheurs talentueux de
+Google Brain et Google Research, ce modèle révolutionnaire a été conçu
+pour pallier les lacunes observées dans les architectures précédentes,
+telles que les RNN et les LSTM.
+
+Au cœur du Transformer réside son mécanisme d\textquotesingle attention,
+qui permet au modèle de prendre en compte le contexte global de
+l\textquotesingle entrée. Contrairement aux RNN, qui traitent les
+données de manière séquentielle et donc lente, le Transformer peut
+exploiter la parallélisation pour accélérer considérablement le
+processus d\textquotesingle entraînement. Ci-dessous l'architecture du
+transformer :
+
+\includegraphics[width=6.3in,height=7.2in]{media/image4.png}
+
+Nous allons maintenant expliquer les mécanismes clé qui forme le
+transformer :
+
+\subsubsection{2.3.5.2 Mécanisme
+d'attention}\label{muxe9canisme-dattention}
+
+Le concept fondamental du mécanisme d\textquotesingle attention, connu
+sous le nom de self-attention, est au cœur de
+l\textquotesingle architecture Transformer. Ce mécanisme analyse les
+relations entre les différents mots d\textquotesingle une séquence afin
+de produire une représentation contextuelle pertinente, enrichissant
+ainsi les informations présentes dans notre entrée.
+
+Le processus de self-attention repose sur trois vecteurs clés : le
+vecteur de requête (q), le vecteur de clé (k) et le vecteur de valeur
+(v). Chacun de ces vecteurs est indexé en fonction de la position du mot
+dans la séquence (par exemple, q1, k1 et v1 pour le premier mot). Ces
+vecteurs sont calculés en multipliant l\textquotesingle incorporation
+(embedding) de la séquence d\textquotesingle entrée par trois matrices,
+qui sont ajustées pendant le processus d\textquotesingle entraînement du
+Transformer.
+
+\subsubsection{2.3.5.3 Encodeur et
+Décodeur}\label{encodeur-et-duxe9codeur}
+
+En ce qui concerne l\textquotesingle architecture spécifique du
+Transformer, l\textquotesingle encodeur et le décodeur jouent des rôles
+essentiels. L\textquotesingle encodeur est constitué
+d\textquotesingle un empilement de N = 6 couches identiques, chaque
+couche comprenant deux sous-couches : un mécanisme de multi-têtes
+self-attention et un réseau de feed-forward. L\textquotesingle entrée de
+chaque encodeur est la sortie du précédent, avec le premier encodeur
+recevant un vecteur d\textquotesingle incorporation et la sortie du
+dernier encodeur étant utilisée dans le décodeur.
+
+Le décodeur, similaire à l\textquotesingle encodeur, est également
+composé de 6 couches identiques, intégrant une sous-couche de
+self-attention et un réseau feed-forward. De plus, le décodeur comprend
+une couche d\textquotesingle attention encodeur-décodeur, qui permet au
+décodeur de se concentrer sur les parties pertinentes de la séquence
+d\textquotesingle entrée pendant le processus de décodage. Finalement,
+le dernier décodeur est connecté à un bloc de réseau neuronal linéaire +
+Soft-max, qui identifie les correspondances dans le vocabulaire pour les
+sorties du dernier encodeur.
+
+\subsubsection{\texorpdfstring{2.3.6 BERT }{2.3.6 BERT }}\label{bert}
+
+\subsubsection{\texorpdfstring{2.3.6.1 Introduction
+}{2.3.6.1 Introduction }}\label{introduction-5}
+
+BERT (Bidirectional Encoder Representations from Transformers) se
+présente comme un modèle transformateur révolutionnaire conçu par une
+équipe de Google en 2018\footnote{acob Devlin, Ming-Wei Chang, Kenton
+  Lee, and Kristina Toutanova. BERT:
+
+  Pre-training of deep bidirectional transformers for language
+  understanding. In
+
+  Proceedings of the 2019 Conference of the North American Chapter of
+  the Asso-
+
+  ciation for Computational Linguistics: Human Language Technologies,
+  Volume 1
+
+  (Long and Short Papers), pages 4171--4186, Minneapolis, Minnesota,
+  June 2019.
+
+  Association for Computational Linguistics.}. Il réinvente la
+pré-entraînement de représentations profondes bidirectionnelles à partir
+de texte non étiqueté en conditionnant conjointement les contextes
+gauche et droit, dans le but d\textquotesingle acquérir une
+compréhension approfondie du contexte linguistique.
+
+Grâce au réglage fin (fine-tuning), réalisé en ajoutant une seule couche
+de sortie supplémentaire, BERT peut produire des résultats de pointe.
+Cette avancée est rendue possible grâce à la technique de Masked LM,
+permettant un entraînement bidirectionnel dans des modèles jusque-là
+inatteignables. Ci-dessous, nous décrivons les procédures générales de
+pré-entraînement et de réglage fin pour BERT :
+
+\includegraphics[width=6.3in,height=2.52014in]{media/image5.png}Figure 6
+- L\textquotesingle Architecture de BERT pour le Pré-entraînement et le
+Réglage Fin
+
+\subsubsection{\texorpdfstring{2.3.6.2 Aperçu Architectural de BERT
+}{2.3.6.2 Aperçu Architectural de BERT }}\label{aperuxe7u-architectural-de-bert}
+
+BERT se compose d\textquotesingle un encodeur de transformateur
+multicouche bidirectionnel, avec deux variantes : le modèle de base et
+le modèle large. La distinction réside dans le nombre de couches, la
+taille cachée et le nombre de têtes d\textquotesingle auto-attention. La
+représentation des données d\textquotesingle entrée peut englober à la
+fois des phrases simples et des paires de phrases au sein
+d\textquotesingle une seule séquence de tokens, facilitant ainsi la mise
+en œuvre de tâches de TALN sur des données conversationnelles.
+
+\subsubsection{\texorpdfstring{2.3.6.3 Pré-entraînement
+}{2.3.6.3 Pré-entraînement }}\label{pruxe9-entrauxeenement}
+
+Deux concepts clés sous-tendent l\textquotesingle ascension de BERT en
+tant que modèle standard pour l\textquotesingle apprentissage par
+transfert :
+
+\begin{itemize}
+\item
+  \textbf{Masked LM} : Pour chaque séquence, un pourcentage de mots est
+  remplacé par le token {[}MASK{]}, incitant le modèle à les prédire en
+  fonction du contexte fourni par les autres mots non masqués de la
+  séquence.
+\item
+  \textbf{Prédiction de la Phrase Suivante (NSP)} : Au cours de
+  l\textquotesingle entraînement de BERT, le modèle reçoit des paires de
+  phrases en entrée et apprend à prédire si la deuxième phrase de la
+  paire est la phrase suivante dans le document
+  d\textquotesingle origine. Tout au long de
+  l\textquotesingle entraînement, 50 \% des entrées sont une paire dans
+  laquelle la deuxième phrase est la phrase suivante dans le document
+  d\textquotesingle origine, tandis que dans les 50 \% restants, une
+  phrase aléatoire du corpus est choisie comme deuxième phrase. Ce
+  concept est essentiel pour comprendre la relation entre deux phrases,
+  cruciale pour des tâches de TALN telles que la réponse aux questions
+  et l\textquotesingle inférence en langage naturel.
+\end{itemize}
+
+\subsubsection{\texorpdfstring{2.3.6.4 Réglage Fin de BERT
+}{2.3.6.4 Réglage Fin de BERT }}\label{ruxe9glage-fin-de-bert}
+
+Le réglage fin permet à BERT de modéliser de nombreuses tâches de TALN,
+à un coût relativement faible, en ajoutant simplement une couche au
+modèle de base :
+
+\begin{itemize}
+\item
+  Les tâches de classification, telles que l\textquotesingle analyse des
+  sentiments, consistent à ajouter une couche de classification
+  au-dessus de la sortie du transformateur pour le token {[}CLS{]}.
+\item
+  Pour la Reconnaissance d\textquotesingle Entités Nommées (NER), où le
+  modèle reçoit une séquence de texte et doit annoter les différents
+  types d\textquotesingle entités qu\textquotesingle elle contient, un
+  modèle NER peut être entraîné en alimentant le vecteur de sortie de
+  chaque token dans une couche de classification qui prédit
+  l\textquotesingle étiquette.
+\end{itemize}
+
+\subsection{2.3 Les différentes taches de
+NLP}\label{les-diffuxe9rentes-taches-de-nlp}
+
+Les subtilités du langage humain rendent extrêmement complexe la tâche
+de développer des logiciels capables de comprendre avec précision le
+sens voulu des textes ou d'autres données. Des phénomènes tels que les
+homonymes, les homophones, le sarcasme, les métaphores et les variations
+de la structure des phrases ne sont que quelques exemples des défis que
+présente le langage humain. Ces subtilités, qui peuvent prendre des
+années à être maîtrisées par les humains, doivent être apprises par les
+programmeurs dès le début pour que les applications basées sur le
+langage naturel puissent reconnaître et comprendre correctement ces
+nuances, et ainsi être véritablement utiles.
+
+Dans le domaine du traitement automatique du langage naturel (TALN),
+plusieurs tâches sont définies pour aider les ordinateurs à interpréter
+les données textuelles. Voici quelques exemples de ces tâches qui nous
+utilisons dans notre projet :
+
+\subsubsection{2.3.1 Reconnaissance d'entités
+nommées}\label{reconnaissance-dentituxe9s-nommuxe9es}
+
+\subsubsection{2.3.1.1 Définition}\label{duxe9finition}
+
+La reconnaissance d\textquotesingle entités nommées (Named Entity
+Recognition ou NER en anglais) est une sous-tâche de
+l\textquotesingle extraction d\textquotesingle informations visant à
+identifier et classer les mots clés, appelés entités, présents dans un
+document. Cette technologie permet de regrouper ces entités en
+catégories prédéfinies. Par exemple, dans un texte, la NER peut détecter
+et distinguer des mentions de personnes et de lieux, qui appartiennent à
+des catégories distinctes.
+
+\subsubsection{\texorpdfstring{2.3.1.2 Les approches du NER
+}{2.3.1.2 Les approches du NER }}\label{les-approches-du-ner}
+
+Comme évoqué précédemment, la reconnaissance d\textquotesingle entités
+nommées a pour but de repérer et de classer des mots dans un document
+textuel. Pour réaliser cette tâche, trois méthodes principales sont
+utilisées : l\textquotesingle approche statistique,
+l\textquotesingle approche basée sur des règles et
+l\textquotesingle approche hybride, qui combine les deux
+premières.\footnote{Hridoy Jyoti Mahanta. A STUDY ON THE APPROACHES OF
+  DEVELOPING
+
+  a NAMED ENTITY RECOGNITION TOOL. 02(14):58--61.}
+
+\paragraph{2.3.1.2.1 Approche basé sur les
+règles}\label{approche-basuxe9-sur-les-ruxe8gles}
+
+Cette méthode repose sur la définition d\textquotesingle un ensemble de
+règles grammaticales, syntaxiques, etc., établies par des linguistes,
+ainsi que sur l\textquotesingle utilisation de dictionnaires. Elle
+implique l\textquotesingle analyse du texte fourni en entrée pour
+identifier les entités et leurs catégories en appliquant les règles
+prédéfinies. Bien que cette approche offre une grande précision, elle
+exige un investissement considérable en termes de travail humain.
+
+\paragraph{2.3.1.2.2 Approche basée
+statistique}\label{approche-basuxe9e-statistique}
+
+Cette méthode, contrairement à la précédente, s\textquotesingle appuie
+sur des règles statistiques et logiques pour atteindre le même objectif,
+en utilisant diverses techniques d\textquotesingle apprentissage
+automatique.
+
+\begin{itemize}
+\item
+  \textbf{Apprentissage supervisé} : Cette méthode nécessite un corpus
+  annoté pour entraîner le modèle. Le principal inconvénient est
+  qu\textquotesingle elle ne se généralise pas bien, en raison du manque
+  de grands ensembles de données pour ce type de tâche, ce qui nous
+  pousse à envisager d\textquotesingle autres approches.
+\item
+  \textbf{Apprentissage semi-supervisé} : Cette approche commence avec
+  un corpus où seules quelques données sont étiquetées. Le modèle est
+  d\textquotesingle abord entraîné sur ces données, puis le processus
+  est itéré pour détecter d\textquotesingle autres entités similaires
+  aux premières. Ce processus est répété en utilisant les résultats
+  précédents pour affiner le modèle.
+\item
+  \textbf{Apprentissage non supervisé} : Cette technique utilise le
+  clustering, qui consiste à regrouper des éléments apparaissant dans
+  des contextes similaires. Pour un texte donné, le modèle tente de
+  trouver le groupe le plus similaire.
+\end{itemize}
+
+Malgré l\textquotesingle efficacité des méthodes
+d\textquotesingle apprentissage automatique et profond, le manque de
+grands ensembles de données les empêche d\textquotesingle atteindre la
+précision des approches basées sur des règles dans des domaines
+spécifiques. Cependant, ces méthodes offrent de meilleures performances
+en termes de généralisation.
+
+\paragraph{2.3.1.2.3 Approche Hybride}\label{approche-hybride}
+
+Dans cette approche, l\textquotesingle objectif est de fusionner les
+techniques basées sur des règles avec celles basées sur des statistiques
+pour tirer le meilleur parti des deux méthodes. L\textquotesingle idée
+est de parvenir à un compromis pour obtenir des résultats optimaux.
+
+\subsubsection{2.3.2 Classification de
+texte}\label{classification-de-texte}
+
+La classification de texte est l\textquotesingle une des applications de
+TALN les plus largement utilisées en raison de ses nombreuses
+utilisations dans le monde réel telles que l\textquotesingle analyse des
+sentiments\footnote{Pang, Bo, and Lee, Lillian 2008. Opinion mining and
+  sentiment analysis. Foundations and Trends R⃝ in Information Retrieval,
+  2(1--2), 1--135.} \footnote{Socher, Richard, Perelygin, Alex, Wu,
+  Jean, et al. 2013. Recursive deep models for semantic compositionality
+  over a sentiment treebank. Pages 1631--1642 of Proceedings of the 2013
+  Conference on Empirical Methods in Natural Language Processing.} les
+critiques de produits\footnote{Maas, Andrew L., Daly, Raymond E., Pham,
+  Peter T., et al. 2011. Learning word vectors for sentiment analysis.
+  Pages 142--150 of Proceedings of the 49th Annual Meeting of the
+  Association for Computational Linguistics: Human Language
+  Technologies. Portland, OR: Association for Computational Linguistics.},
+la classification des actualités, ou la classification de
+l\textquotesingle intention de l\textquotesingle utilisateur dans les
+requêtes de recherche.
+
+La classification de texte consiste à attribuer des catégories ou des
+étiquettes à des documents textuels en fonction de leur contenu. Cette
+technique permet de rendre les informations non structurées plus
+accessibles et exploitables. En utilisant des algorithmes sophistiqués,
+la classification de texte aide à automatiser et à accélérer le
+processus de tri et d\textquotesingle organisation de grandes quantités
+de données textuelles, ce qui est essentiel dans de nombreux domaines,
+de la recherche académique à l\textquotesingle industrie.
+
+\subsubsection{2.3.3 Extraction
+d\textquotesingle informations}\label{extraction-dinformations}
+
+L\textquotesingle extraction d\textquotesingle informations est la tâche
+de traitement du langage naturel (NLP) qui extrait des informations
+sémantiques structurées à partir de texte. Ces informations incluent des
+relations binaires - par exemple, des interactions biochimiques entre
+deux protéines\footnote{Krallinger, Martin, Leitner, Florian,
+  Rodriguez-Penagos, Carlos, and Valencia, Alfonso. 2008. Overview of
+  the protein--protein interaction annotation extraction task of
+  BioCreative II. Genome Biology, 9(2), 1--19} ou des événements n-aires
+- c\textquotesingle est-à-dire des événements avec plus de deux
+arguments tels que des attaques terroristes, où chaque attaque est
+associée à plusieurs arguments, y compris l\textquotesingle emplacement
+de l\textquotesingle attaque, l\textquotesingle identité de
+l\textquotesingle attaquant, le nombre de victimes, le montant des
+dommages matériels, et ainsi de suite.\footnote{Sundheim, Beth M. 1992.
+  Overview of the fourth message understanding evaluation
+
+  and conference. Technical report. Naval Command Control and Ocean
+  Surveillance Center, RDT \& E Division, San Diego, CA.}
+L\textquotesingle extraction d\textquotesingle informations permet de
+nombreuses applications réelles importantes telles que la découverte de
+traitements potentiels pour les maladies ou la surveillance des attaques
+terroristes à partir de documents de presse.
+
+\subsubsection{2.3.4 Extraction de
+relations}\label{extraction-de-relations}
+
+\subsubsection{2.3.4.1 Introduction}\label{introduction-6}
+
+L\textquotesingle extraction de relations est une sous tache de
+l'extraction d'informations (IE) qui vise à identifier et à extraire les
+liens sémantiques entre différents éléments dans un texte. Ces éléments
+peuvent être des entités telles que des personnes, des lieux ou des
+événements, et les relations entre eux peuvent être diverses, allant des
+simples associations binaires aux structures plus complexes impliquant
+plusieurs entités. L\textquotesingle objectif principal de
+l\textquotesingle extraction de relations est de transformer le texte
+non structuré en données exploitables, facilitant ainsi la compréhension
+automatique des informations contenues dans les documents textuels.
+Cette tâche est cruciale dans de nombreux domaines, notamment la
+recherche d\textquotesingle informations, l\textquotesingle analyse des
+médias sociaux, la veille stratégique et la médecine.
+
+\subsubsection{2.3.4.2 Les approches du RE}\label{les-approches-du-re}
+
+Plusieurs approches existent pour l'extraction de relations\footnote{Kartik
+  Detroja, C.K. Bhensdadia, Brijesh S. Bhatt, A survey on Relation
+  Extraction, Intelligent Systems with Applications, Volume 19, 2023,
+  200244, ISSN 2667-3053.}~:
+
+\paragraph{2.3.4.2.1 Approche basé sur les
+règles}\label{approche-basuxe9-sur-les-ruxe8gles-1}
+
+Ces méthodes sont également appelées méthodes basées sur des patterns
+(motifs) construits manuellement. Ces types de méthodes définissent un
+ensemble de patterns d\textquotesingle extraction pour un ensemble
+prédéfini de relations. Ensuite, ces patterns
+d\textquotesingle extraction sont comparés au texte. Si un pattern
+correspond, une relation correspondant à ce pattern est trouvée dans le
+texte.
+
+Par exemple un pattern pour les hyponymes~comme `such X as Y' avec le
+texte `such actors as angelina' donne hyponyme(actor,angelina).
+
+Les méthodes basées sur des règles nécessitent une expertise du domaine
+et des connaissances linguistiques pour définir des modèles
+d\textquotesingle extraction. Ces méthodes sont spécifiques à un
+domaine, reposant sur une structure de document fixe et des relations
+cibles prédéfinies. Lorsqu\textquotesingle on passe d\textquotesingle un
+domaine à un autre, il devient nécessaire de redéfinir les relations
+cibles et les modèles d\textquotesingle extraction. Par conséquent, les
+méthodes basées sur des règles demandent un effort manuel considérable
+et ne conviennent pas pour des corpus hétérogènes.
+
+\paragraph{\texorpdfstring{2.3.4.2.2 Approche basé sur l'apprentissage
+non supervisé
+}{2.3.4.2.2 Approche basé sur l'apprentissage non supervisé }}\label{approche-basuxe9-sur-lapprentissage-non-supervisuxe9}
+
+Les méthodes non supervisées ne nécessitent pas de données annotées. La
+plupart des méthodes non supervisées d\textquotesingle extraction de
+relations utilisent une approche basée sur le clustering.
+L\textquotesingle une des premières approches non supervisées
+d\textquotesingle extraction de relations basée sur le clustering ont
+utilisé un étiqueteur d\textquotesingle entités nommées pour extraire
+les entités afin de se concentrer uniquement sur les relations avec les
+entités nommées mentionnées. Les étapes principales de la méthode
+d\textquotesingle apprentissage non supervisée sont :
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Identification des entités nommées dans le corpus de texte
+\item
+  Identification des entités nommées co-occurrentes et de leur contexte
+\item
+  Regroupement des paires d\textquotesingle entités en fonction de la
+  similarité de leur contexte
+\item
+  Attribution d\textquotesingle un nom de relation sémantique à chaque
+  groupe.
+\end{enumerate}
+
+\paragraph{\texorpdfstring{2.3.4.2.3 Approche basé sur l'apprentissage
+supervisé
+}{2.3.4.2.3 Approche basé sur l'apprentissage supervisé }}\label{approche-basuxe9-sur-lapprentissage-supervisuxe9}
+
+Les méthodes supervisées nécessitent une grande quantité de données
+d\textquotesingle entraînement, annotées avec un ensemble
+d\textquotesingle entités et de relations. Elles utilisent ces données
+d\textquotesingle entraînement pour former un classificateur, qui
+extraira ensuite les relations des données de test. Il existe deux types
+de méthodes supervisées : les méthodes basées sur les caractéristiques
+et les méthodes basées sur les noyaux.
+
+\begin{itemize}
+\item
+  Les méthodes basées sur les caractéristiques~(features) :
+\end{itemize}
+
+Un ensemble de caractéristiques est généré pour chaque relation dans les
+données d\textquotesingle entraînement, puis un classificateur est
+entraîné à extraire une nouvelle instance de relation.
+
+\begin{itemize}
+\item
+  Les méthodes basées sur les noyaux (kernal)~:
+\end{itemize}
+
+Dans les approches basées sur les noyaux, des fonctions de noyau sont
+utilisées pour déterminer la similarité entre deux représentations
+d\textquotesingle instances de relation.
+
+\paragraph{\texorpdfstring{2.3.4.2.3 Approche basé sur l'apprentissage
+semi-supervisé
+}{2.3.4.2.3 Approche basé sur l'apprentissage semi-supervisé }}\label{approche-basuxe9-sur-lapprentissage-semi-supervisuxe9}
+
+La création de données pour les méthodes supervisées
+d\textquotesingle extraction de relations implique des coûts, des
+efforts et du temps. Cependant, les méthodes supervisées peuvent
+automatiser le processus de génération de données étiquetées grâce à des
+algorithmes de bootstrap. Cette approche offre deux avantages clés :
+
+\begin{itemize}
+\item
+  Elle réduit l\textquotesingle effort nécessaire pour créer des données
+  étiquetées
+\item
+  Elle tire parti des données non étiquetées disponibles gratuitement.
+\end{itemize}
+
+L\textquotesingle algorithme de bootstrap repose sur une grande quantité
+de données non étiquetées et un petit ensemble
+d\textquotesingle instances de départ représentant le type de relation
+souhaité. Par exemple, pour extraire la relation "CapitaleDe", des
+exemples de départ comme (New Delhi, Inde), (Canberra, Australie) et
+(Londres, Angleterre) peuvent être utilisés pour développer un modèle
+d\textquotesingle extraction. Avec ces exemples de départ en entrée,
+l\textquotesingle algorithme de bootstrap est conçu pour identifier des
+relations similaires impliquant des paires d\textquotesingle entités
+telles que (Paris, France). La Figure 7 illustre le modèle pour extraire
+des motifs et des tuples de départ en utilisant une approche
+d\textquotesingle apprentissage semi-supervisé.
+
+\includegraphics[width=3.888in,height=2.001in]{media/image6.jpeg}
+
+\paragraph{2.3.4.2.4 Approche de supervision
+distante}\label{approche-de-supervision-distante}
+
+Ces méthodes sont également appelées méthodes supervisées faiblement ou
+basées sur la connaissance. Les chercheurs ont proposé une méthode dans
+laquelle les données d\textquotesingle entraînement sont automatiquement
+générées en alignant le texte avec une base de connaissances (KB), ce
+qui élimine le besoin d\textquotesingle étiquetage manuel. La
+supervision distante repose sur l\textquotesingle idée que si deux
+entités partagent une relation dans une KB, toutes les phrases
+mentionnant ces entités pourraient exprimer cette relation.
+
+La supervision distante utilise une base de connaissances comme Freebase
+pour extraire les relations entre entités. Lorsqu\textquotesingle une
+paire d\textquotesingle entités apparaît à la fois dans une phrase et
+dans la KB, la phrase est liée de manière heuristique à la relation
+correspondante de la KB. Par exemple, dans la phrase "Bill Gates est le
+fondateur de Microsoft", si "Bill Gates" et "Microsoft" sont répertoriés
+comme un triplet (entité1 : Bill Gates, entité : Microsoft, relation :
+fondateur\_de) dans Freebase, alors ces entités représentent la relation
+"fondateur\_de".
+
+\paragraph{2.3.4.2.5 Approche basé apprentissage
+profond}\label{approche-basuxe9-apprentissage-profond}
+
+L\textquotesingle utilisation de l\textquotesingle apprentissage profond
+dans l\textquotesingle extraction de relations a considérablement
+révolutionné la façon dont nous abordons cette tâche. Les réseaux de
+neurones profonds permettent une représentation complexe et hiérarchique
+des données textuelles, ce qui les rend particulièrement adaptés à la
+capture de nuances et de contextes subtils présents dans les relations
+entre entités. Par exemple, les architectures telles que les réseaux de
+neurones récurrents (RNN) ou les transformers peuvent prendre en compte
+la séquentialité du langage naturel, permettant ainsi une compréhension
+plus profonde des dépendances contextuelles. De plus, les modèles de
+langue pré-entraînés, comme BERT, ont démontré leur capacité à capturer
+des informations sémantiques riches, ce qui est crucial pour
+l\textquotesingle extraction précise des relations.
+
+\subsubsection{2.3.5 Similarité des
+phrases}\label{similarituxe9-des-phrases}
+
+\subsubsection{2.3.5.1 Introduction}\label{introduction-7}
+
+La similarité des phrases est la tâche qui consiste à déterminer à quel
+point deux textes sont similaires. Les modèles de similarité des phrases
+convertissent les textes d\textquotesingle entrée en vecteurs
+(embeddings) qui capturent les informations sémantiques et calculent à
+quel point ils sont proches (similaires) entre eux. Cette tâche est
+particulièrement utile pour la recherche d\textquotesingle informations
+et le clustering.\footnote{https://huggingface.co/tasks/sentence-similarity}
+
+\subsubsection{2.3.5.2 Approches pour la similarité des
+phrases}\label{approches-pour-la-similarituxe9-des-phrases}
+
+Plusieurs méthodes existent~:
+
+\paragraph{2.3.5.2.1 Approches basé vecteurs sparses
+:}\label{approches-basuxe9-vecteurs-sparses}
+
+Ces approches utilisant les représentations discutées précédemment, Bag
+of words et tf-idf.
+
+L\textquotesingle utilisation des représentations en sac de mots (Bag of
+Words) et du TF-IDF (Term Frequency-Inverse Document Frequency) pour
+mesurer la similarité des phrases est une méthode couramment employée en
+traitement automatique des langues. Le modèle sac de mots transforme un
+texte en une matrice de termes, où chaque phrase est représentée par la
+fréquence des mots qu\textquotesingle elle contient. Bien que simple,
+cette approche ignore l\textquotesingle ordre des mots, ce qui peut
+limiter sa capacité à saisir le sens contextuel. Pour améliorer cette
+représentation, le TF-IDF pondère les fréquences des termes en tenant
+compte de leur importance dans le corpus, réduisant
+l\textquotesingle impact des mots courants et accentuant ceux plus
+significatifs. En utilisant ces représentations, les phrases peuvent
+être comparées à l\textquotesingle aide de mesures de similarité telles
+que le cosinus, permettant d\textquotesingle évaluer la proximité
+sémantique entre elles. Bien que ces méthodes soient moins sophistiquées
+que les modèles d\textquotesingle apprentissage profond modernes, elles
+restent efficaces et largement utilisées pour des tâches telles que la
+recherche d\textquotesingle informations, le clustering de textes et la
+classification de documents.
+
+L\textquotesingle utilisation des représentations en sac de mots (Bag of
+Words) et du TF-IDF pour mesurer la similarité des phrases présente
+plusieurs inconvénients, notamment la création de vecteurs clairsemés
+(sparse). Ces méthodes transforment chaque phrase en un vecteur de
+grande dimension où chaque dimension correspond à un mot unique du
+corpus. Étant donné que chaque phrase ne contient qu\textquotesingle un
+sous-ensemble des mots possibles, la plupart des dimensions de ces
+vecteurs sont nulles, ce qui conduit à des vecteurs extrêmement
+clairsemés.
+
+Cette sparsité pose plusieurs problèmes. Premièrement, elle rend
+difficile la capture des relations sémantiques entre les mots, car les
+représentations ne prennent pas en compte l\textquotesingle ordre des
+mots ni les contextes dans lesquels ils apparaissent. Deuxièmement, la
+haute dimensionnalité des vecteurs peut entraîner des inefficacités en
+termes de stockage et de calcul, rendant les opérations de similarité,
+comme la mesure de la similarité cosinus, plus coûteuses et moins
+robustes. Enfin, les vecteurs clairsemés sont sensibles au bruit et
+peuvent manquer de généralisation, ce qui limite leur efficacité pour
+des tâches complexes nécessitant une compréhension fine des nuances
+linguistiques. Ces limitations ont conduit à l\textquotesingle adoption
+de méthodes plus avancées, telles que les embeddings de mots et les
+modèles de langue pré-entraînés, qui offrent des représentations denses
+et contextuelles mieux adaptées à la tâche de similarité de phrases.
+
+\paragraph{2.3.5.2.1 Approches basé embeddings
+:}\label{approches-basuxe9-embeddings}
+
+L\textquotesingle utilisation des embeddings a transformé la manière
+dont nous abordons la similarité des phrases en offrant des
+représentations vectorielles denses et contextuelles des mots et des
+documents. Les word embeddings, tels que Word2Vec et GloVe, capturent
+des relations sémantiques entre les mots en les plaçant dans un espace
+vectoriel continu où des mots similaires sont proches les uns des
+autres. Ces représentations surpassent les modèles traditionnels comme
+le sac de mots et TF-IDF en considérant le contexte dans lequel les mots
+apparaissent. Cependant, les word embeddings présentent des limitations.
+Ils ne capturent que les relations de mots isolés et ignorent les
+nuances contextuelles des phrases. De plus, les embeddings statiques ne
+changent pas en fonction du contexte, ce qui peut conduire à des
+ambiguïtés pour des mots ayant plusieurs sens.
+
+Pour pallier ces problèmes, des méthodes comme Doc2Vec ont été
+développées pour générer des embeddings de documents en prenant en
+compte l\textquotesingle ensemble de la phrase ou du texte. Doc2Vec
+produit des vecteurs denses pour des phrases, des paragraphes ou des
+documents entiers, offrant ainsi une meilleure capture des contextes
+larges et des relations sémantiques plus globales. Néanmoins, Doc2Vec
+peut être complexe à former et nécessite une quantité substantielle de
+données pour produire des représentations de haute qualité.
+
+Des avancées plus récentes, telles que les modèles de langage
+contextuels comme BERT et GPT, utilisent des techniques de
+pré-entraînement sur de vastes corpus textuels pour créer des embeddings
+qui changent en fonction du contexte. Ces modèles offrent des
+représentations contextuelles riches, capturant les nuances fines des
+phrases et permettant une compréhension approfondie du langage naturel.
+Malgré leurs performances impressionnantes, ces modèles nécessitent une
+grande puissance de calcul pour l\textquotesingle entraînement et
+l\textquotesingle inférence, ce qui peut être un obstacle pour certaines
+applications.
+
+\subsection{\texorpdfstring{2.4 \textbf{Travaux
+Connexes}}{2.4 Travaux Connexes}}\label{travaux-connexes}
+
+Dans le domaine de l\textquotesingle analyse des entretiens des forces
+de l\textquotesingle ordre, en particulier en ce qui concerne la
+détection des contradictions et la recommandation de questions, il
+existe une absence notable de systèmes ou de projets existants
+directement comparables à la portée et aux objectifs de notre travail.
+Alors que les technologies de l\textquotesingle intelligence
+artificielle (IA) ont été largement adoptées dans divers secteurs et
+applications, leur intégration dans le contexte spécialisé de
+l\textquotesingle analyse des entretiens des forces de
+l\textquotesingle ordre reste relativement peu explorée.
+
+Malgré la reconnaissance croissante du potentiel de l\textquotesingle IA
+pour améliorer les processus d\textquotesingle investigation, notamment
+dans des tâches telles que l\textquotesingle examen de
+l\textquotesingle écriture manuscrite\footnote{Yavorsky, M. А., Useev,
+  R. Z., \& Kurushin, S. A. (2021). Information Technologies in Law
+  Enforcement: Overview of Implements and Opportunities. \emph{European
+  Proceedings of Social and Behavioural Sciences (EpSBS)}, 4(2), 166.},
+la littérature et les systèmes existants ignorent largement les
+exigences nuancées de l\textquotesingle analyse des entretiens des
+forces de l\textquotesingle ordre. L\textquotesingle absence de systèmes
+dédiés à la détection des contradictions et à la recommandation de
+questions dans ce domaine souligne la nécessité
+d\textquotesingle approches innovantes adaptées aux défis spécifiques et
+aux objectifs des agences d\textquotesingle investigation.
+
+De plus, bien que les systèmes pilotés par l\textquotesingle IA pour
+l\textquotesingle analyse textuelle et les applications de traitement
+automatique du langage naturel (TALN) aient été largement étudiés dans
+d\textquotesingle autres domaines, tels que le service client ou les
+soins de santé, leur adaptation aux subtilités de
+l\textquotesingle analyse des entretiens des forces de
+l\textquotesingle ordre est limitée. Les recherches et projets existants
+dans des domaines adjacents ne parviennent pas à répondre aux exigences
+uniques de l\textquotesingle analyse des entretiens dans les contextes
+d\textquotesingle enquête, laissant un écart significatif dans les
+capacités requises pour des pratiques d\textquotesingle investigation
+complètes et efficaces.
+
+\subsection{2.5 Recherches dans la
+Contradiction}\label{recherches-dans-la-contradiction}
+
+La détection de contradiction en traitement automatique du langage
+naturel (TALN) implique l\textquotesingle identification et le
+traitement des énoncés qui sont mutuellement exclusifs ou en conflit de
+signification. Cette tâche est cruciale dans diverses applications de
+TALN telles que l\textquotesingle analyse de sentiment, la réponse aux
+questions et les systèmes de dialogue, où la compréhension de la
+cohérence et de la consistance des entrées textuelles est essentielle.
+
+Une approche courante de la détection de contradiction consiste à
+utiliser des modèles d\textquotesingle apprentissage automatique, en
+particulier des réseaux neuronaux. Ces modèles sont entraînés sur des
+ensembles de données annotés contenant des paires de phrases étiquetées
+comme contradictoires ou non-contradictoires\footnote{Bowman, Samuel R.,
+  et al. "A large annotated corpus for learning natural language
+  inference." Proceedings of the 2015 Conference on Empirical Methods in
+  Natural Language Processing (EMNLP), 2015.}. Des techniques telles que
+les réseaux siamois ou les architectures basées sur les transformateurs
+comme BERT (Bidirectional Encoder Representations from Transformers)
+sont largement utilisées à cette fin. En apprenant des représentations
+contextuelles des phrases, ces modèles peuvent efficacement capturer les
+relations sémantiques et identifier les contradictions.
+
+Une autre technique consiste à exploiter les caractéristiques
+linguistiques et les règles d\textquotesingle inférence logique pour
+détecter les contradictions. Cette approche implique souvent de
+représenter les phrases sous une forme structurée, telle que des formes
+logiques ou des graphes sémantiques, puis d\textquotesingle appliquer
+des techniques de raisonnement formel pour vérifier les incohérences.
+Cependant, cette approche peut rencontrer des défis pour gérer
+l\textquotesingle ambiguïté et la scalabilité.
+
+De plus, des recherches récentes ont exploré
+l\textquotesingle intégration de sources de connaissances externes,
+telles que les bases de connaissances du bon sens ou les graphes de
+connaissances mondiaux, pour améliorer la détection de contradiction. En
+incorporant des connaissances de fond sur le monde, les modèles peuvent
+mieux comprendre les indices contextuels et formuler des jugements plus
+éclairés sur la plausibilité des énoncés.
+
+\subsection{2.6 Systèmes de
+recommandation}\label{systuxe8mes-de-recommandation}
+
+Les systèmes de recommandation sont des outils essentiels dans divers
+domaines, allant du commerce en ligne aux plateformes de streaming, en
+passant par les réseaux sociaux. Ils utilisent des techniques
+d\textquotesingle apprentissage automatique et de traitement du langage
+naturel pour analyser les préférences et les comportements des
+utilisateurs afin de proposer des contenus ou des produits pertinents.
+Par exemple, Amazon et Netflix emploient des algorithmes de filtrage
+collaboratif et de filtrage basé sur le contenu pour améliorer
+l\textquotesingle expérience utilisateur\footnote{Linden, Greg, Brent
+  Smith, and Jeremy York. "Amazon.com recommendations: Item-to-item
+  collaborative filtering." \emph{IEEE Internet Computing} 7.1 (2003) :
+  76-80.}. En combinant des méthodes telles que les réseaux de neurones
+et les modèles de graphes de connaissances, ces systèmes peuvent fournir
+des recommandations personnalisées et contextuellement adaptées
+\footnote{Shi, Yue, et al. "Collaborative filtering beyond the user-item
+  matrix: A survey of the state of the art and future challenges."
+  \emph{ACM Computing Surveys (CSUR)} 47.1 (2014): 3.}. De plus, les
+avancées récentes dans l\textquotesingle utilisation des modèles de
+transformateurs, comme BERT et GPT, ont permis
+d\textquotesingle améliorer considérablement la précision des
+recommandations en comprenant mieux le contexte et les intentions des
+utilisateurs \footnote{Sun, Yu, et al. "BERT4Rec: Sequential
+  recommendation with bidirectional encoder representations from
+  transformers." \emph{Proceedings of the 28th ACM International
+  Conference on Information and Knowledge Management}. 2019.}.
+
+\subsection{2.7 Recommandation des
+questions}\label{recommandation-des-questions}
+
+La recherche spécifique dédiée uniquement aux systèmes de recommandation
+de questions dans l\textquotesingle analyse des entretiens des forces de
+l\textquotesingle ordre est limitée, mais le domaine le plus large des
+systèmes de recommandation et de recherche
+d\textquotesingle informations fournit des méthodologies pertinentes
+applicables à ce domaine. Les systèmes de recommandation de questions
+visent à aider le personnel de l\textquotesingle application de la loi à
+formuler des questions pertinentes lors d\textquotesingle enquêtes ou
+d\textquotesingle interrogatoires. Les techniques de traitement
+automatique du langage naturel (TALN) et d\textquotesingle apprentissage
+automatique sont souvent exploitées pour analyser les données textuelles
+et suggérer des questions pertinentes en fonction du contexte, des
+données historiques et des connaissances du domaine\footnote{Hu,
+  Zhengyu, et al. "Personalized question recommendation in community
+  question answering websites." ACM Transactions on Information Systems
+  (TOIS) 33.2 (2015): 7.}. Ces systèmes peuvent utiliser des approches
+telles que le filtrage collaboratif, le filtrage basé sur le contenu ou
+des méthodes hybrides pour générer des recommandations de questions
+personnalisées adaptées à des scénarios d\textquotesingle enquête
+spécifiques.
+
+\subsection{2.8 Filtrage basé sur le contenu (Content-based
+filtering)}\label{filtrage-basuxe9-sur-le-contenu-content-based-filtering}
+
+Le filtrage basé sur le contenu est une technique clé dans les systèmes
+de recommandation, utilisée pour proposer des éléments similaires à ceux
+que l\textquotesingle utilisateur a déjà appréciés. Contrairement au
+filtrage collaboratif, qui repose sur les préférences des autres
+utilisateurs, le filtrage basé sur le contenu analyse les
+caractéristiques des éléments eux-mêmes pour fournir des
+recommandations. Par exemple, dans le domaine de la musique ou des
+films, les systèmes de recommandation peuvent utiliser des informations
+telles que les genres, les acteurs, ou les artistes pour suggérer des
+contenus similaires \footnote{Lops, Pasquale, Marco de Gemmis, and
+  Giovanni Semeraro. "Content-based recommender systems: State of the
+  art and trends." \emph{Recommender systems handbook}. Springer,
+  Boston, MA, 2011. 73-105.}. Cette méthode utilise souvent des
+techniques de traitement du langage naturel pour extraire et analyser
+les caractéristiques des textes, telles que les descriptions de produits
+ou les résumés de films \footnote{Pazzani, Michael J., and Daniel
+  Billsus. "Content-based recommendation systems." \emph{The adaptive
+  web}. Springer, Berlin, Heidelberg, 2007. 325-341.}. De plus,
+l\textquotesingle intégration des réseaux de neurones et des modèles de
+représentation de texte comme TF-IDF ou les embeddings de mots a permis
+d\textquotesingle améliorer la précision et la pertinence des
+recommandations basées sur le contenu \footnote{Karatzoglou, Alexandros,
+  et al. "Content-based recommendation systems." \emph{Recommender
+  Systems Handbook}. Springer, 2015. 627-681.}.
+
+\section{Chapitre 3~: Conception}\label{chapitre-3-conception}
+
+\subsection{3.1 Introduction}\label{introduction-8}
+
+Dans ce chapitre, nous détaillerons la conception de notre système. Nous
+commençons par présenter les diagrammes de cas d'utilisations et de
+classes pour avoir une vue globale du système. Puis nous passons à nos
+modules de détection de la contradiction et de recommandation des
+questions.
+
+\subsection{\texorpdfstring{3.2 Diagramme de cas d'utilisation
+}{3.2 Diagramme de cas d'utilisation }}\label{diagramme-de-cas-dutilisation}
+
+\includegraphics[width=6.3in,height=4.24792in]{media/image7.jpg}
+
+\subsection{3.3 Diagramme de classes}\label{diagramme-de-classes}
+
+To be done
+
+\subsection{3.4 Module de détection de la
+contradiction}\label{module-de-duxe9tection-de-la-contradiction}
+
+Notre approche consiste à proposer un modèle de reconnaissance d'entités
+nommées, puis combiner ce dernier avec un modèle d'extraction de
+relation afin d'avoir les relations définies pour ensuite détecter les
+contradictions. Ce processus est exécuté à chaque entrée d'une paire
+question-réponse.
+
+\includegraphics[width=6.3in,height=3.70417in]{media/image8.JPG}
+
+\subsection{3.5 Module de recommandation des
+questions}\label{module-de-recommandation-des-questions}
+
+\subsubsection{3.5.1 Introduction}\label{introduction-9}
+
+Le module de recommandation des questions vise à assister les agents de
+la force publique pendant les interviews en générant des questions
+pertinentes et contextuelles. Ce module est crucial pour maintenir le
+flux de l\textquotesingle entretien, surtout lorsque
+l\textquotesingle agent ne sait plus quelles questions poser pour
+obtenir des informations complètes et cohérentes de la part de
+l\textquotesingle interviewé.
+
+\subsubsection{3.5.2 Description
+de~l'approche}\label{description-de-lapproche}
+
+Pour la Recommandation de questions, on fait un content-based filtering
+pour choisir les auditions qui ont des features communes avec l'audition
+en question. Puis, pour chaque audition résultante, on passe leurs
+paires question-réponse au modèle de similarité de phrases pour trouver
+les paires les plus similaires à la dernière paire de l'audition en
+question, ce qui nous donne les questions suivantes à recommander.
+
+\includegraphics[width=6.3in,height=5.45069in]{media/image9.JPG}
+
+\subsubsection{\texorpdfstring{3.5.3 Filtrage
+}{3.5.3 Filtrage }}\label{filtrage}
+
+\subsubsection{3.5.4 Sentence similarity}\label{sentence-similarity}
+
+Après avoir identifié les auditions pertinentes, nous procéderons à une
+comparaison entre la dernière paire question-réponse de notre audition
+courante et les paires contenues dans ces auditions pertinentes. Pour ce
+faire, nous utiliserons la similarité de texte.
+
+La similarité de phrase se réfère au degré de similarité ou de proximité
+entre deux phrases en termes de leur signification ou contenu
+sémantique. La similarité retournée est un score entre 0 et 1, 0 pour
+pas de relation entre les phrases, et 1 pour deux phrases identiques.
+
+Il existe plusieurs approches pour faire la similarité de textes.
+
+\end{document}

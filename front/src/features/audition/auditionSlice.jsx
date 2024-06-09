@@ -6,7 +6,8 @@ export const auditionSlice = createSlice({
     name: '',
     type: '',
     birthDate: '',
-    number: 0
+    number: 0,
+    auditions: []
   },
   reducers: {
     setInfo: (state, action) => {
@@ -15,10 +16,13 @@ export const auditionSlice = createSlice({
     state.birthDate = action.payload.birthDate
     state.number = action.payload.personNumber
     },
+    setAuditions: (state,action) => {
+      state.auditions = action.payload.auditions
+    }
   }
 })
 
 // Action creators are generated for each case reducer function
-export const { setInfo } = auditionSlice.actions
+export const { setInfo, setAuditions } = auditionSlice.actions
 
 export default auditionSlice.reducer

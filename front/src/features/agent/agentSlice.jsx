@@ -5,18 +5,25 @@ export const agentSlice = createSlice({
   initialState: {
     name: '',
     username: '',
-    password: ''
+    password: '',
+    affaires: [],
+    currentAffaire: 0,
   },
   reducers: {
     setAuth: (state, action) => {
     state.name = action.payload.name
     state.username = action.payload.username
     state.password = action.payload.password
+    state.affaires = action.payload.affaires
+    state.currentAffaire = action.payload.currentAffaire
     },
+    setCurrentAffaire: (state,action) => {
+      state.currentAffaire = action.payload.currentAffaire
+    }
   }
 })
 
 // Action creators are generated for each case reducer function
-export const { setAuth } = agentSlice.actions
+export const { setAuth, setCurrentAffaire } = agentSlice.actions
 
 export default agentSlice.reducer

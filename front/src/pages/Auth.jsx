@@ -53,8 +53,8 @@ function Auth() {
     console.log(jsonResponse) // parses JSON response into native JavaScript objects
 
     if (response.ok) {
-      dispatch(setAuth({...credentials, name: jsonResponse.name}))
-      navigate("/home");
+      dispatch(setAuth({...credentials, name: jsonResponse.name, affaires: jsonResponse.affaires, currentAffaire: jsonResponse.currentAffaire}))
+      navigate("/affaires");
     }
   }
   };
