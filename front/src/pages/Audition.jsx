@@ -4,7 +4,6 @@ import { Input } from "@/components/ui/input";
 import { useState } from "react";
 import { Link } from 'react-router-dom';
 import { useSelector } from "react-redux";
-import audition from "./a1";
 
 function Audition() {
 
@@ -20,6 +19,11 @@ function Audition() {
   const [month, setMonth] = useState("");
   const [day, setDay] = useState("");
   const [hour, setHour] = useState("");
+  const [duration, setDuration] = useState("");
+  const [wilaya, setWilaya] = useState("");
+  const [daira, setDaira] = useState("");
+  const [commune, setCommune] = useState("");
+  const [adresse, setAdresse] = useState("");
 
   const predefinedQuestions = [
     "___ ما علاقتك مع",
@@ -214,6 +218,14 @@ function Audition() {
                 placeholder="الساعة"
                 className="flex-grow"
               />
+                <Input
+                id="Duration"
+                type="text"
+                value={duration}
+                onChange={(e) => setDuration(e.target.value)}
+                placeholder="المدة بالساعات"
+                className="flex-grow"
+              />
               </>
             }
               <select
@@ -237,6 +249,44 @@ function Audition() {
           </Button>
         </div>
         <div>
+          { selectedQuestion === " اين كنت يوم " ? 
+          (
+            <div className="flex flex-grow space-x-2">
+            <Input
+            id="Wilaya"
+            type="text"
+            value={wilaya}
+            onChange={(e) => setWilaya(e.target.value)}
+            placeholder="الولاية"
+            className="flex-grow"
+          />
+          <Input
+            id="daira"
+            type="text"
+            value={daira}
+            onChange={(e) => setDaira(e.target.value)}
+            placeholder="الدائرة"
+            className="flex-grow"
+          />
+          <Input
+            id="commune"
+            type="text"
+            value={commune}
+            onChange={(e) => setCommune(e.target.value)}
+            placeholder="البلدية"
+            className="flex-grow"
+          />
+            <Input
+            id="adresse"
+            type="text"
+            value={adresse}
+            onChange={(e) => setAdresse(e.target.value)}
+            placeholder="العنوان"
+            className="flex-grow"
+          />
+          </div>
+          )
+          :
           <Input
             type="text"
             placeholder="أكتب الاجابة"
@@ -244,6 +294,7 @@ function Audition() {
             onChange={(e) => setAnswer(e.target.value)}
             className="flex-grow mb-1"
           />
+        }
         </div>
         <Button type="submit" className="flex-grow mb-1">
         تأكيد

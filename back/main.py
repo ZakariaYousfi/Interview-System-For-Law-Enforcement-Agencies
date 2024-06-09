@@ -84,9 +84,9 @@ def admin_page(opt=None):
 def auth_page(opt=None):
     login = False
     content = request.get_json(silent=True)
-    if(content["username"] == "abcd" and content["password"] == "abcdabcd" ):
+    if(content["username"] == "toufik1988" and content["password"] == "toufikmarbouh95" ):
         login = True
-        resp = Response(json.dumps({"name" : "محمد لمين", "affaires": [{"id":1, "type": "سرقة","description": "سرقة محل باب الواد"}, {"id": 2,"type": "قتل", "description":"جريمة قتل في الملعب"}], "currentAffaire": 0}))
+        resp = Response(json.dumps({"name" : "مربوح توفيق", "affaires": [{"id":1, "type": "سرقة","description": "سرقة محل باب الواد"}, {"id": 2,"type": "قتل", "description":"جريمة قتل في الملعب"}], "currentAffaire": 0}))
         resp.headers["Access-Control-Expose-Headers"] = "*"
         resp.status = 200
     else:
