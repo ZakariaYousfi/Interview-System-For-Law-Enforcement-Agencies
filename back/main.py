@@ -137,6 +137,17 @@ def question_recommendation():
     resp.headers["Access-Control-Expose-Headers"] = "*"
     return resp       
 
+@app.route("/contradiction", methods=['GET', 'POST'])
+@cross_origin(supports_credentials=True)
+def contradiction():
+    content = request.get_json(silent=True)
+    print("hi")
+    print(content)
+    resp = Response(json.dumps(content))
+    resp.headers["Access-Control-Expose-Headers"] = "*"
+    resp.status = 200
+    return resp
+
 
 if __name__ == "__main__":
   app.run(host='127.0.0.1', port=5000, debug=True)

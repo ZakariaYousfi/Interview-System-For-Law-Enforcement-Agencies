@@ -4,7 +4,6 @@ import { Input } from "@/components/ui/input";
 import { useState } from "react";
 import { Link } from 'react-router-dom';
 import { useSelector } from "react-redux";
-
 function Audition() {
 
   const personData = useSelector(state => state.audition)
@@ -24,7 +23,6 @@ function Audition() {
   const [daira, setDaira] = useState("");
   const [commune, setCommune] = useState("");
   const [adresse, setAdresse] = useState("");
-
   const predefinedQuestions = [
     "___ ما علاقتك مع",
     " اين كنت يوم "
@@ -124,6 +122,39 @@ function Audition() {
       } 
   }
   
+  const goToContradiction = async () => {
+
+    const url = import.meta.env.VITE_JSON_SERVER_URL + '/contradiction'
+  
+    console.log(url)
+    const response = await fetch(url, {
+      method: "POST", // *GET, POST, PUT, DELETE, etc.
+      mode: "cors", // no-cors, *cors, same-origin
+      cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+      credentials: "same-origin", // include, *same-origin, omit
+      dataType: 'json',
+      data: pairs,
+      xhrFields: {
+         withCredentials: true
+      },
+      crossDomain: true,
+      headers: {
+        "Content-Type": "application/json",
+        // 'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      redirect: "follow", // manual, *follow, error
+      referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+      body: JSON.stringify(pairs), // body data type must match "Content-Type" header
+    });
+    const jsonResponse = await response.json();
+    console.log(jsonResponse) // parses JSON response into native JavaScript objects
+
+    if (response.ok) {
+      console.log(jsonResponse)
+    } else {
+      console.error("Contradiction detection failed");
+    } 
+  }
   
   return (
     <div className="flex flex-col h-screen">
@@ -131,7 +162,7 @@ function Audition() {
       <Link to="/home">
         <Button variant="primary">إلغاء الجلسة</Button>
       </Link>
-      <Button variant="primary">إغلاق الجلسة</Button>
+      <Button variant="primary" onClick = {goToContradiction}>إغلاق الجلسة</Button>
       <div className="text-right">
         <p className="text-lg font-semibold">{personData.type}</p>
         <p className="text-sm">{personData.name} : الاسم</p>
