@@ -1,5 +1,5 @@
 
-const audition2 = {
+const audition3 = {
   auditionId: 1,
   type: "قتل",
   personType: "مشتبه به",
@@ -25,4 +25,4 @@ const audition2 = {
   ]
 }
 
-export default audition2
+export default audition3

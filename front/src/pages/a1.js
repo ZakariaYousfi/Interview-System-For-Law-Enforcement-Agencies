@@ -2,7 +2,7 @@
 const audition1 = {
   auditionId: 1,
   type: "قتل",
-  personType: "مشتبه به",
+  personType: "شاهد",
   personId: 1,
   personName: "بلماضي شعيب",
   content: [

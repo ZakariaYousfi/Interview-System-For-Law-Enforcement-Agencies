@@ -3,16 +3,25 @@ import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { Link, useParams } from 'react-router-dom';
 import { useSelector } from "react-redux";
+import audition3 from "./a3";
+
 function Audition() {
 
   let params = useParams()
   console.log(params.auditionId)
 
   // Api call to get audition data + check contradicition and report it
-  const personData = useSelector(state => state.audition)
+  let personData = useSelector(state => state.audition)
   const [pairs, setPairs] = useState([]);
   const [contradiction, setContradictions] = useState([]);
-
+  const contradictions = ['تناقض بين علاقة زرقاوي خيثر مع زرقاوي سمير ابني ضد صديقي',
+    'تناقض  بين مكان الوجود يوم 2024-5-20-16-8 الجزائر-باب الواد ضد الجزائر-بوزريعة']
+  personData = {
+    type: "مشتبه به",
+    birthDate: '1970/10/15',
+    name: "زرقاوي خيثر",
+    number: 25849462,
+  }
   const getContradiction = async () => {
 
     const url = import.meta.env.VITE_JSON_SERVER_URL + '/contradiction'
@@ -58,28 +67,27 @@ function Audition() {
       <Button variant="primary" onClick = {getContradiction}>جلسة مغلقة</Button>
       <div className="text-right">
         <p className="text-lg font-semibold">{personData.type}</p>
-        <p className="text-sm">{personData.name} : الاسم</p>
+        <p className="text-sm">الاسم : {personData.name}</p>
         <p className="text-sm">{personData.birthDate} : تاريخ الميلاد</p>
         <p className="text-sm">{personData.number} : الرقم</p>
       </div>
     </header>
       <div className="flex flex-grow">
         <main className="flex-grow overflow-y-auto p-4 bg-white">
-          {pairs.map((pair, index) => (
+          {audition3.content.map((pair, index) => (
             <div key={index} className="mb-4 p-4 border rounded-lg shadow-sm">
-              <h2 className="text-lg font-bold">{pair.q} : السؤال</h2>
-              <p className="mt-2">{pair.a} : الجواب</p>
+              <h2 className="text-lg"> <span className="font-bold">سؤال : </span>{pair.q}؟</h2>
+              <p className="mt-2"><span className="font-bold">جواب : {pair.a}</span></p>
             </div>
           ))}
         </main>
         <aside className="bg-gray-200 p-4 w-1/4 overflow-y-auto">
           {/* Placeholder for future content */}
-          <Button onClick = { getContradiction }>:التناقضات ان وجدت</Button>
-          <h2 className="text-xl font-semibold mb-4 mt-2">{contradiction.length ? 'التناقضات التي وجدت' : ''}</h2>
+          <h2 className="text-xl font-semibold mb-4 mt-2">{contradictions.length ? 'التناقضات التي وجدت' : ''}</h2>
   <ul className="space-y-4">
-    {contradiction.map((question, i) => (
+    {contradictions.map((contradiction, i) => (
       <li key={i} className="bg-white p-4 rounded-lg shadow-md">
-        <span className="block text-gray-800 font-medium">{question}؟</span>
+        <span className="block text-gray-800 font-medium">{contradiction}</span>
         <hr className="my-2 border-gray-300" />
       </li>
     ))}
