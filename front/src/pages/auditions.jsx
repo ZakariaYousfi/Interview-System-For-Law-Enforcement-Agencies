@@ -10,9 +10,9 @@ const Auditions = () => {
     const authData = useSelector(state => state.agent)
     console.log(authData)
     const navigate = useNavigate();
-  const handleCaseClick = (currentAffaire) => {
-    console.log("id:" + currentAffaire)
-    navigate("/home");
+    const handleCaseClick = (currentAudition) => {
+    console.log("id:" + currentAudition)
+    navigate("/audition/" + currentAudition);
   };
     return (
         <div className="bg-gray-100 min-h-screen p-8">
@@ -25,14 +25,14 @@ const Auditions = () => {
           <main className="container mx-auto">
             <h2 className="text-xl font-semibold mb-6">الجلسات السابقة</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {[audition1,audition2].map((affaire) => (
+              {[audition1,audition2].map((audition) => (
                 <Card
-                  key={affaire.id}
+                  key={audition.id}
                   className="p-4 bg-white rounded shadow-md hover:shadow-lg transition-shadow cursor-pointer"
-                  onClick={() => handleCaseClick(affaire.auditionId)}
+                  onClick={() => handleCaseClick(audition.auditionId)}
                 >
-                  <h3 className="text-lg font-bold">{affaire.personType}</h3>
-                  <p className="text-gray-700">{affaire.personName}</p>
+                  <h3 className="text-lg font-bold">{audition.personType}</h3>
+                  <p className="text-gray-700">{audition.personName}</p>
                 </Card>
               ))}
             </div>

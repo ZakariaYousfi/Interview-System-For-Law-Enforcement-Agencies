@@ -7,7 +7,8 @@ import AuditionInfo from "./pages/AuditionInfo";
 import Affaires from "./pages/Affaires";
 import AddAgents from "./pages/AddAgents";
 import CreateCase from "./pages/CreateCase";
-import Auditions from "./pages/auditions";
+import Auditions from "./pages/Auditions";
+import AuditionDone from "./pages/AuditionDone";
 
 const App = () =>  {
       return (
@@ -21,6 +22,7 @@ const App = () =>  {
           <Route path="/add-agents" element={<AddAgents/>} />
           <Route path="/create-case" element={<CreateCase/>} />
           <Route path="/auditions" element={<Auditions/>} />
+          <Route path="/audition/:auditionId" element={<AuditionDone/>} />
       </Routes>
 )
 
