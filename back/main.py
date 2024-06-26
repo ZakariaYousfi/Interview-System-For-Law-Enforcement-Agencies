@@ -86,7 +86,7 @@ def auth_page(opt=None):
     content = request.get_json(silent=True)
     if(content["username"] == "toufik1988" and content["password"] == "toufikmarbouh95" ):
         login = True
-        resp = Response(json.dumps({"name" : "مربوح توفيق", "affaires": [{"id":1, "type": "سرقة","description": "سرقة محل باب الواد"}, {"id": 2,"type": "قتل", "description":"جريمة قتل في الملعب"}], "currentAffaire": 0}))
+        resp = Response(json.dumps({"name" : "مربوح توفيق", "affaires": [{"id":1, "type": "سرقة","description": "سرقة محل باب الواد"}, {"id": 2,"type": "قتل", "description":"جريمة قتل في ملعب 5 جويلية"}], "currentAffaire": 0}))
         resp.headers["Access-Control-Expose-Headers"] = "*"
         resp.status = 200
     else:

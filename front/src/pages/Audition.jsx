@@ -165,7 +165,7 @@ function Audition() {
       <Button variant="primary" onClick = {goToContradiction}>إغلاق الجلسة</Button>
       <div className="text-right">
         <p className="text-lg font-semibold">{personData.type}</p>
-        <p className="text-sm">{personData.name} : الاسم</p>
+        <p className="text-sm">الاسم : {personData.name}</p>
         <p className="text-sm">{personData.birthDate} : تاريخ الميلاد</p>
         <p className="text-sm">{personData.number} : الرقم</p>
       </div>
@@ -174,8 +174,8 @@ function Audition() {
         <main className="flex-grow overflow-y-auto p-4 bg-white">
           {pairs.map((pair, index) => (
             <div key={index} className="mb-4 p-4 border rounded-lg shadow-sm">
-              <h2 className="text-lg font-bold">{pair.q} : السؤال</h2>
-              <p className="mt-2">{pair.a} : الجواب</p>
+              <h2 className="text-lg"> <span className="font-bold">سؤال : </span>{pair.q}؟</h2>
+              <p className="mt-2"><span className="font-bold">جواب : {pair.a}</span></p>
             </div>
           ))}
         </main>

@@ -1,0 +1,11 @@
+create table Person (personID int primary key, fullname varchar(50), birthday date, number int);
+create type PType as enum ('مشتبه به','شاهد','ضحية');
+create type CType as enum ('جريمة الكترونية','قتل','سرقة');
+create table Affaire (affaireID int primary key, caseType CType, description varchar(100), creationDate date );
+create table Audition (auditionID int primary key, personType PType, creationDate date, affaireID int, foreign key (affaireID) references Affaire);
+create table PairQA (pairID bigint primary key, question varchar(150), answer varchar(150), auditionID int, foreign key (auditionID) references Audition);
+create table Lieu (lieuID int primary key, wilaya varchar(20), daira varchar(20), commune varchar(20));
+create table Agent(agentID int primary key, username varchar(50), pass varchar(50), fullname varchar(50));
+create table AgentAffaire(agentAffaireID bigint primary key, agentID int, affaireID int, foreign key (agentID) references Agent, foreign key (affaireID) references Affaire);
+create table relationPP(relationPPID bigint primary key, statementMakerID int, relatedPersonID int, auditionID int, foreign key (statementMakerID) references Person, foreign key (relatedPersonID) references Person, relation varchar(20), foreign key (auditionID) references Audition);
+create table relationPL(relationPLID bigint primary key, existanceDate date, heur smallint, duration smallint, statementMakerID int, lieuID int, foreign key (statementMakerID) references Person, foreign key (lieuID) references Lieu);

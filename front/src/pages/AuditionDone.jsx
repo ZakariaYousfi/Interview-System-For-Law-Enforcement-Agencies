@@ -14,6 +14,7 @@ function Audition() {
   let personData = useSelector(state => state.audition)
   const [pairs, setPairs] = useState([]);
   const [contradiction, setContradictions] = useState([]);
+  const contradictionss = []
   const contradictions = ['تناقض بين علاقة زرقاوي خيثر مع زرقاوي سمير ابني ضد صديقي',
     'تناقض  بين مكان الوجود يوم 2024-5-20-16-8 الجزائر-باب الواد ضد الجزائر-بوزريعة']
   personData = {
@@ -83,7 +84,7 @@ function Audition() {
         </main>
         <aside className="bg-gray-200 p-4 w-1/4 overflow-y-auto">
           {/* Placeholder for future content */}
-          <h2 className="text-xl font-semibold mb-4 mt-2">{contradictions.length ? 'التناقضات التي وجدت' : ''}</h2>
+          <h2 className="text-xl font-semibold mb-4 mt-2">{contradictions.length ? 'التناقضات التي وجدت' : 'لا توجد تناقضات'}</h2>
   <ul className="space-y-4">
     {contradictions.map((contradiction, i) => (
       <li key={i} className="bg-white p-4 rounded-lg shadow-md">
