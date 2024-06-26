@@ -16,7 +16,7 @@ const Home = () => {
     <div className="container mx-auto py-16">
         <h1 className="text-4xl font-bold text-center mb-8">  قضية  {affaireData.type} : {affaireData.description}</h1>
         <div className="flex justify-center space-x-4">
-            <Link to="/admin">
+            <Link to="/affaires">
                 <Button variant="primary">العودة إلى القضايا</Button>
             </Link>
             <Link to="/create-audition">

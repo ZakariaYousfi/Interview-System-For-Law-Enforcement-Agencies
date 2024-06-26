@@ -1,3 +1,5 @@
+here is my database.
+
 CREATE EXTENSION vector;
 create table Person (personID int primary key, fullname varchar(50), birthday date, number int);
 create type PType as enum ('مشتبه به','شاهد','ضحية');
@@ -18,3 +20,20 @@ ALTER TABLE relationpl ADD COLUMN qaID bigint;
 ALTER TABLE relationpp ADD COLUMN qaID bigint;
 ALTER TABLE relationpl ADD foreign key (qaID) references pairqa;
 ALTER TABLE relationpp ADD foreign key (qaID) references pairqa;
+
+give me a python file that uses psycopg2 to do the following things with this db, the database is called auditionDB.
+
+insert some dummy data on all tables.
+query to get Affaires of Agent
+query to get auditions of an Affaire
+query to get audition with it's pairqas and person data
+query to insert an audition and it's pairq
+query to insert relationpl
+query to insert relationpp
+query to get agent using username and pass
+query to get relationpl using statementmakerID and qaID
+query to get relationpp using statementmakerID and qaID
+query to insert an affaire, and an agent to this affaire
+query to add an agent to an affaire using his username
+queries to add an agent using his username password and name, modify an agents data, delete an agent.
+query to get pairqa where given a caseType, personType or preferably give a qembedding and aembedding compare with existing ones that have the same personType and caseType.
