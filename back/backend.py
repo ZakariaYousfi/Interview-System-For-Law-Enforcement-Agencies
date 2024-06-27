@@ -8,6 +8,10 @@ import re
 import numpy as np
 from nltk import ngrams
 from utilities import * # import utilities.py module
+# Connection parameters - adjust as needed
+from dbqueries import *
+from datetime import datetime
+
 
 # Opening JSON file
 f1 = open('auditions/a1.json', encoding="utf8")
@@ -82,11 +86,19 @@ def admin_page(opt=None):
 @app.route("/auth", methods=['GET', 'POST'])
 @cross_origin(supports_credentials=True)
 def auth_page(opt=None):
-    login = False
+    print('hi')
     content = request.get_json(silent=True)
-    if(content["username"] == "toufik1988" and content["password"] == "toufikmarbouh95" ):
-        login = True
-        resp = Response(json.dumps({"name" : "مربوح توفيق", "affaires": [{"id":1, "type": "سرقة","description": "سرقة محل باب الواد"}, {"id": 2,"type": "قتل", "description":"جريمة قتل في ملعب 5 جويلية"}], "currentAffaire": 0}))
+    agent_data = get_agent_by_credentials(content["username"], content["password"])
+    (agent_id,username,password,fullname) = agent_data
+    agent_affaire = get_affaires_of_agent(agent_id)
+    print(agent_affaire)
+    affaires = []
+    for affaire in agent_affaire:
+        (affaire_id, caseType, description, creationdate) = affaire
+        affaires.append({"id": affaire_id, "type": caseType, "description": description, "creationdate": creationdate.strftime("%d-%m-%Y") })
+    print(affaires)
+    if(agent_data):
+        resp = Response(json.dumps({"id":agent_id,"name" : fullname, "affaires": affaires, "currentAffaire": 0}))
         resp.headers["Access-Control-Expose-Headers"] = "*"
         resp.status = 200
     else:
@@ -94,44 +106,38 @@ def auth_page(opt=None):
         resp.status = 401
     return resp
 
+@app.route("/case", methods=['GET', 'POST'])
+@cross_origin(supports_credentials=True)
+def case_page(opt=None):
+    print('hi')
+    content = request.get_json(silent=True)
+    (affaire_id,temp) = insert_affaire_and_agent(content["caseType"], content["description"], content["agentId"])
+    print(affaire_id)
+    if(affaire_id):
+        resp = Response(json.dumps({"currentAffaire":affaire_id}))
+        resp.headers["Access-Control-Expose-Headers"] = "*"
+        resp.status = 200
+    else:
+        resp = Response()
+        resp.status = 401
+    return resp
+
+
 @app.route("/recommendation", methods=['GET', 'POST'])
 @cross_origin(supports_credentials=True)
 def question_recommendation():
     content = request.get_json(silent=True)
-    print(content)
-    qcosine_scores = []
-    for i in d1['content']:
-        embeddingsq1 = model.encode(content['q'])
-        embeddingsq2 = model.encode(i['q'])
-        embeddingsa1 = model.encode(content['a'])
-        embeddingsa2 = model.encode(i['a'])
-        #Compute cosine-similarits
-        qcosine_scores.append({"q": util.
-        pytorch_cos_sim(embeddingsq1, embeddingsq2),
-        "a":util.pytorch_cos_sim(embeddingsa1, embeddingsa2)})
-        #Output the pairs with their score
 
-    qa_scores = {}
-
-    for i in range(len(d1['content'])):
-        qa_scores[i] = qcosine_scores[i]
-        # print("{} \t\t {} \t\t Score: {}".format(d1['content'][i], qa, qcosine_scores[i][0][0]))
-
-    print(qa_scores)
-
-    product = []
-    for j in qa_scores:
-        product.append(qa_scores[j]["q"]*qa_scores[j]["a"])
-
-    print(product)
-
-    index = product.index(max(product))
-
+    # model translate to embeddings here
+    qembedding = model.encode(content["q"])
+    aembedding = model.encode(content["a"])
+    top_pair, following_pairs  = get_similar_pairqa_with_following_context(content["caseType"], content["auditionType"], qembedding.tolist(), aembedding.tolist())
     recommended = []
-
-    for i in range(index + 1, len(d1['content'])):
-        recommended.append(d1['content'][i]['q'])
-
+    for pair in following_pairs:
+        (pair_id, question, answer, auditionId, q_embedding, a_embedding) = pair
+        recommended.append(question)
+        print(question)
+    print(recommended)
     resp = Response(json.dumps(recommended))
     resp.status = 200
     resp.headers["Access-Control-Expose-Headers"] = "*"

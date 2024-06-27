@@ -7,7 +7,7 @@ import random
 conn_params = {
     "dbname": "auditionDB",
     "user": "postgres",
-    "password": "postgres",
+    "password": "abcdabcd",
     "host": "localhost"
 }
 
@@ -21,16 +21,16 @@ def insert_dummy_data():
             cur.execute("""
                 INSERT INTO Person (personID, fullname, birthday, number)
                 VALUES 
-                (1, 'John Doe', '1990-01-01', 123456),
-                (2, 'Jane Smith', '1985-05-15', 789012)
+                (1,'بلماضي شعيب', '1970-01-01', 123456),
+                (2, 'زرقاوي خيثر', '1970-10-15', 789012)
             """)
 
             # Insert Affaire data
             cur.execute("""
                 INSERT INTO Affaire (affaireID, caseType, description, creationDate)
                 VALUES 
-                (1, 'جريمة الكترونية', 'Cybercrime case', '2023-01-01'),
-                (2, 'قتل', 'Murder case', '2023-02-15')
+                (1, 'قتل', 'Murder case', '2023-02-15')
+                (2, 'جريمة الكترونية', 'Cybercrime case', '2023-01-01'),
             """)
 
             # Insert Audition data
@@ -184,12 +184,15 @@ def insert_affaire_and_agent(case_type, description, agent_id):
                 VALUES (%s, %s, %s)
                 RETURNING affaireID
             """, (case_type, description, date.today()))
-            affaire_id = cur.fetchone()[0]
+            affaire = cur.fetchone()
+            affaire_id = affaire[0]
 
             cur.execute("""
                 INSERT INTO AgentAffaire (agentID, affaireID)
                 VALUES (%s, %s)
             """, (agent_id, affaire_id))
+
+            return affaire
 
 def add_agent_to_affaire_by_username(username, affaire_id):
     with connect_db() as conn:
@@ -235,14 +238,109 @@ def get_similar_pairqa(case_type, person_type, q_embedding, a_embedding):
                 JOIN Affaire af ON a.affaireID = af.affaireID
                 WHERE af.caseType = %s AND a.personType = %s
                 ORDER BY 
-                    (pq.qembedding <-> %s::vector(384)) +
-                    (pq.aembedding <-> %s::vector(384))
+                    (pq.qembedding <=> %s::vector) *
+                    (pq.aembedding <=> %s::vector)
                 LIMIT 5
             """, (case_type, person_type, q_embedding, a_embedding))
             return cur.fetchall()
 
+def get_similar_pairqa_with_following_context(case_type, person_type, q_embedding, a_embedding):
+    with connect_db() as conn:
+        with conn.cursor() as cur:
+            # First, get the most similar pair
+            cur.execute("""
+                SELECT pq.* FROM PairQA pq
+                JOIN Audition a ON pq.auditionID = a.auditionID
+                JOIN Affaire af ON a.affaireID = af.affaireID
+                WHERE af.caseType = %s AND a.personType = %s
+                ORDER BY 
+                    (pq.qembedding <=> %s::vector) *
+                    (pq.aembedding <=> %s::vector)
+                LIMIT 1
+            """, (case_type, person_type, q_embedding, a_embedding))
+            
+            top_pair = cur.fetchone()
+            
+            if top_pair is None:
+                return None, []
+            
+            # Now, get all pairs from the same audition that come after the top pair
+            cur.execute("""
+                SELECT pq.* FROM PairQA pq
+                WHERE pq.auditionID = %s AND pq.pairID > %s
+                ORDER BY pq.pairID
+            """, (top_pair[3], top_pair[0]))  # Assuming auditionID is the 4th column and pairID is the 1st column in PairQA
+            
+            following_pairs = cur.fetchall()
+            
+            return top_pair, following_pairs
+
+
+def insert_pairqa_with_embeddings(question, answer, audition_id, q_embedding, a_embedding):
+    with connect_db() as conn:
+        with conn.cursor() as cur:
+            cur.execute("""
+                INSERT INTO PairQA (question, answer, auditionID, qembedding, aembedding)
+                VALUES (%s, %s, %s, %s::vector, %s:vector)
+            """, (question, answer, audition_id, q_embedding, a_embedding))
+
+from sentence_transformers import SentenceTransformer, util
+model = SentenceTransformer('sentence-transformers/all-MiniLM-L6-v2')
+
+
+content = [
+    {
+      "q": "ما اسمك الكامل",
+      "a": "بلماضي شعيب"
+    },
+    {
+        "q": "ما يكون لك بلماضي سمير",
+        "a": "اخي"
+      },
+      {
+        "q": "ملك من هذا السكين",
+        "a": "ملكي"
+      },
+      {
+        "q": "هل يمكنك تفسير لماذا وجد في مسرح الجريمة",
+        "a": "لا ادري"
+      },
+      {
+        "q": "من الذي أحضره",
+        "a": "لا اعرف"
+      }
+  ]
+
+auditionId = 1
+"""
+for pair in content:
+        qembeddings = model.encode(pair["q"])
+        aembeddings = model.encode(pair["a"])
+        insert_pairqa_with_embeddings(pair['q'],pair['a'], auditionId, qembeddings.tolist(), aembeddings.tolist())
+"""
+qa =      {
+        "q": "ملك من هذا السكين",
+        "a": "ملكي"
+      }
+
+caseType = "قتل"
+
+personType = "مشتبه به"
 # Example usage
 if __name__ == "__main__":
+    qembedding = model.encode(qa["q"])
+    aembedding = model.encode(qa["a"])
+    # Get similar PairQA with context
+    top_pair, following_pairs  = get_similar_pairqa_with_following_context(caseType,personType, qembedding.tolist(), aembedding.tolist())
+    
+    if top_pair:
+        print("Top Pair:", top_pair)
+        print("Context Pairs:")
+        for pair in following_pairs:
+            print(pair)
+    else:
+        print("No matching pairs found.")
+    """
     insert_dummy_data()
     print(get_affaires_of_agent(1))
     print(get_auditions_of_affaire(1))
@@ -259,3 +357,4 @@ if __name__ == "__main__":
     modify_agent(1, 'agent1_modified', 'newpass1', 'Agent One Modified')
     delete_agent(2)
     print(get_similar_pairqa('جريمة الكترونية', 'مشتبه به', [0.1, 0.2, 0.3], [0.4, 0.5, 0.6]))
+    """

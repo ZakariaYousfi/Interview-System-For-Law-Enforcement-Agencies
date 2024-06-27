@@ -51,9 +51,10 @@ const CreateCase = () => {
         } else {
         const jsonResponse = await response.json();
         console.log(jsonResponse) // parses JSON response into native JavaScript objects
+        agentData.affaires.push(jsonResponse.affaire)
         if (response.ok) {
           dispatch(setAuth({...agentData, currentAffaire: jsonResponse.currentAffaire}))
-          navigate("/");
+          navigate("/affaires");
         }
         setCaseType("");
         setDescription("");

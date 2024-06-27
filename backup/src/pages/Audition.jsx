@@ -7,9 +7,6 @@ import { useSelector } from "react-redux";
 function Audition() {
 
   const personData = useSelector(state => state.audition)
-  const agentData = useSelector(state => state.agent)
-  const type = agentData.affaires.find((affaire) => affaire.id == agentData.currentAffaire).type
-
   const [pairs, setPairs] = useState([]);
   const [recommended, setRecommended] = useState([]);
   const [isCustomQuestion, setIsCustomQuestion] = useState(true);
@@ -93,14 +90,7 @@ function Audition() {
       const pair = pairs[pairs.length - 1]
   
       const url = import.meta.env.VITE_JSON_SERVER_URL + '/recommendation'
-
-      const data = {
-        q: pair.q,
-        a: pair.a,
-        caseType: type,
-        auditionType: personData.type
-      }
-
+  
       console.log(url)
       const response = await fetch(url, {
         method: "POST", // *GET, POST, PUT, DELETE, etc.
@@ -108,7 +98,7 @@ function Audition() {
         cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
         credentials: "same-origin", // include, *same-origin, omit
         dataType: 'json',
-        data: data,
+        data: pair,
         xhrFields: {
            withCredentials: true
         },
@@ -119,7 +109,7 @@ function Audition() {
         },
         redirect: "follow", // manual, *follow, error
         referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-        body: JSON.stringify(data), // body data type must match "Content-Type" header
+        body: JSON.stringify(pair), // body data type must match "Content-Type" header
       });
       const jsonResponse = await response.json();
       console.log(jsonResponse) // parses JSON response into native JavaScript objects
