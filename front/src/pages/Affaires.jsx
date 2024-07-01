@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card"; // Assuming you have a Card component
 import { setCurrentAffaire } from "../features/agent/agentSlice";
+import { setAuditions } from "../features/audition/auditionSlice";
 
 const Affaires = () => {
         
@@ -11,7 +12,41 @@ const Affaires = () => {
     console.log(authData)
     const navigate = useNavigate();
     const dispatch = useDispatch()
-  const handleCaseClick = (currentAffaire) => {
+  const handleCaseClick = async (currentAffaire) => {
+  
+  
+      const url = import.meta.env.VITE_JSON_SERVER_URL + '/auditions'
+
+
+      const response = await fetch(url, {
+        method: "POST", // *GET, POST, PUT, DELETE, etc.
+        mode: "cors", // no-cors, *cors, same-origin
+        cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+        credentials: "same-origin", // include, *same-origin, omit
+        dataType: 'json',
+        data: currentAffaire,
+        xhrFields: {
+           withCredentials: true
+        },
+        crossDomain: true,
+        headers: {
+          "Content-Type": "application/json",
+          // 'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        redirect: "follow", // manual, *follow, error
+        referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+        body: JSON.stringify(currentAffaire), // body data type must match "Content-Type" header
+      });
+      const jsonResponse = await response.json();
+      console.log(jsonResponse) // parses JSON response into native JavaScript objects
+  
+      if (response.ok) {
+        console.log(jsonResponse)
+        dispatch(setAuditions(jsonResponse))
+      } else {
+        console.error("Recommendation failed");
+      } 
+
     console.log("id:" + currentAffaire)
     dispatch(setCurrentAffaire({ currentAffaire: currentAffaire}))
     navigate("/home");

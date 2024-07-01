@@ -1,28 +1,17 @@
 import "../App.css";
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
 import { Link, useParams } from 'react-router-dom';
 import { useSelector } from "react-redux";
-import audition3 from "./a3";
 
 function Audition() {
 
   let params = useParams()
   console.log(params.auditionId)
-
+  const auditionData = useSelector( state => state.audition)
+  const contradictions = auditionData.contradictions
+  const qData = auditionData.qData
+  const personData = auditionData
   // Api call to get audition data + check contradicition and report it
-  let personData = useSelector(state => state.audition)
-  const [pairs, setPairs] = useState([]);
-  const [contradiction, setContradictions] = useState([]);
-  const contradictionss = []
-  const contradictions = ['تناقض بين علاقة زرقاوي خيثر مع زرقاوي سمير ابني ضد صديقي',
-    'تناقض  بين مكان الوجود يوم 2024-5-20-16-8 الجزائر-باب الواد ضد الجزائر-بوزريعة']
-  personData = {
-    type: "مشتبه به",
-    birthDate: '1970/10/15',
-    name: "زرقاوي خيثر",
-    number: 25849462,
-  }
   const getContradiction = async () => {
 
     const url = import.meta.env.VITE_JSON_SERVER_URL + '/contradiction'
@@ -34,7 +23,7 @@ function Audition() {
       cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
       credentials: "same-origin", // include, *same-origin, omit
       dataType: 'json',
-      data: pairs,
+      data: {},
       xhrFields: {
          withCredentials: true
       },
@@ -45,15 +34,13 @@ function Audition() {
       },
       redirect: "follow", // manual, *follow, error
       referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-      body: JSON.stringify(pairs), // body data type must match "Content-Type" header
+      body: JSON.stringify({}), // body data type must match "Content-Type" header
     });
     const jsonResponse = await response.json();
     console.log(jsonResponse) // parses JSON response into native JavaScript objects
 
     if (response.ok) {
       console.log(jsonResponse)
-      setPairs(jsonResponse.audition)
-      setContradictions(jsonResponse.contradiction)
     } else {
       console.error("Contradiction detection failed");
     } 
@@ -75,9 +62,9 @@ function Audition() {
     </header>
       <div className="flex flex-grow">
         <main className="flex-grow overflow-y-auto p-4 bg-white">
-          {audition3.content.map((pair, index) => (
+          {qData.map((pair, index) => (
             <div key={index} className="mb-4 p-4 border rounded-lg shadow-sm">
-              <h2 className="text-lg"> <span className="font-bold">سؤال : </span>{pair.q}؟</h2>
+              <h2 className="text-lg"> <span className="font-bold">سؤال : {pair.q}</span>؟</h2>
               <p className="mt-2"><span className="font-bold">جواب : {pair.a}</span></p>
             </div>
           ))}
@@ -86,9 +73,9 @@ function Audition() {
           {/* Placeholder for future content */}
           <h2 className="text-xl font-semibold mb-4 mt-2">{contradictions.length ? 'التناقضات التي وجدت' : 'لا توجد تناقضات'}</h2>
   <ul className="space-y-4">
-    {contradictions.map((contradiction, i) => (
+    {contradictions.map((contra, i) => (
       <li key={i} className="bg-white p-4 rounded-lg shadow-md">
-        <span className="block text-gray-800 font-medium">{contradiction}</span>
+        <span className="block text-gray-800 font-medium">{contra['contradiction']}</span>
         <hr className="my-2 border-gray-300" />
       </li>
     ))}

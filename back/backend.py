@@ -23,11 +23,11 @@ d1 = json.load(f1)
 
 # Closing file
 f1.close()
-"""
+
 
 from sentence_transformers import SentenceTransformer, util
 model = SentenceTransformer('sentence-transformers/all-MiniLM-L6-v2')
-
+"""
 # ============================== 
 # ====== Uni-Grams Models ======
 
@@ -64,11 +64,7 @@ def handle_preflight():
 @app.route("/", methods=['GET', 'POST'])
 @cross_origin(supports_credentials=True)
 def hello_world():
-    content = request.get_json(silent=True)
     print("hi")
-    print(content)
-    resp = Response(json.dumps(content))
-    return resp
 
 @app.route("/people", methods=['GET', 'POST'])
 @cross_origin(supports_credentials=True)
@@ -143,17 +139,106 @@ def question_recommendation():
     resp.headers["Access-Control-Expose-Headers"] = "*"
     return resp       
 
-@app.route("/contradiction", methods=['GET', 'POST'])
+@app.route("/audition", methods=['GET', 'POST'])
 @cross_origin(supports_credentials=True)
 def contradiction():
     content = request.get_json(silent=True)
-    print("hi")
     print(content)
-    resp = Response(json.dumps(content))
+    qData = content['qData']
+    pData = content['pData']
+    pair_ids = []
+    # create person now if doesn't exist and get his id  
+    # then create a new audition with person id case id person type and get it's id 
+    audition_id = add_person_and_create_audition(pData['name'], pData['birthDate'], pData['number'], pData['caseId'], pData['type'])
+    for pair in qData:
+        # translate to embeddings then insert into pairqa table 
+        qembedding = model.encode(pair['q'])
+        aembedding = model.encode(pair['a'])
+        # based on relation type insert adequate relation 
+        if(pair['type'] == 'no'):
+            insert_pairqa_with_embeddings(pair['q'], pair['a'], audition_id, qembedding.tolist(), aembedding.tolist())
+        elif(pair['type'] == 'pp'):
+            # here the word2vec model for relation classification
+            insert_pairqa_and_relationpp(audition_id, pair['q'], pair['a'], qembedding.tolist(), aembedding.tolist(), pData['name'], pair['relatedPerson'], pair['a'])
+        else:
+            pair_id, lieu_id = insert_pairqa_lieu_and_relationpl(audition_id, pair['q'], pair['a'], qembedding.tolist(), aembedding.tolist(), 
+                                      pair['wilaya'], pair['daira'], pair['commune'], pData['name'], 
+                                      pair['year'], pair['month'], pair['day'], pair['hour'], pair['duration'])
+            pair_ids.append([pair_id, lieu_id])
+    contradictions = []
+    everything = get_relationpl(pData['name'])
+    for pairlieuids in pair_ids:
+        qapairid = pairlieuids[0]
+        lieuid = pairlieuids[1]
+    relevant_data = []
+    for something in everything:
+        (relationplid, dateofextensive, heur, duration, lieuid, qaid, statementmaker, lieuid2, wilaya, daira, commune) = something
+        relevant_data.append({ "statementmaker": statementmaker, "year": dateofextensive.year, "month": dateofextensive.month, "day": dateofextensive.day, "heur": heur, "duration": duration, "wilaya": wilaya, "daira": daira, "commune": commune})
+    print(relevant_data)
+    for releventi in relevant_data:
+        if(releventi['duration']>24):
+            durationdays = int(releventi['duration']/24)
+            durationhours = releventi['duration'] % 24
+            releventi['days'] += durationdays
+            releventi['duration'] = durationhours
+        for releventj in relevant_data:
+            if(releventj['duration']>24):
+                durationdays = int(releventj['duration']/24)
+                durationhours = releventj['duration'] % 24
+                releventj['days'] += durationdays
+                releventj['duration'] = durationhours
+            if(releventi['year'] == releventj['year'] and releventi['month'] == releventj['month'] and releventi['day'] == releventj['day']):
+                print('this stuff is tyring')
+    contrafound = False
+    for pair in qData:
+        if(pair['type'] == 'pp'):
+            statements = get_relationpp(pData['name'], pair['relatedPerson'])
+            data = []
+            for statement in statements:
+                (relationppid,relation,qaid,statementmakername,relatedpersonname) = statement
+                data.append({"name": statementmakername, "related": relatedpersonname, "relation": relation})   
+            print(data)
+        # based on qtype
+        if(pair['type'] == 'pp'):
+            for i in range(0,len(data)-1):
+                for j in range(1,len(data)):
+                    print("pair['a']:",pair['a'])
+                    print("data[i]['relation']",data[i]['relation'])
+                    print("data[j]['relation']",data[j]['relation'])
+                    print("data[i]['name']",data[i]['name'])
+                    print("pData['name']",pData['name'])
+                    print("data[j]['name']",data[j]['name'])
+                    print("data[i]['related']",data[i]['related'])
+                    print("pair['relatedPerson']",pair['relatedPerson'])
+                    print("data[j]['related']",data[j]['related'])
+                    if(data[i]['name'] == pData['name'] and data[j]['name'] == pData['name'] and data[i]['related'] == pair['relatedPerson'] and data[j]['related'] == pair['relatedPerson'] and pair['a'] == data[j]['relation'] and data[i]['relation'] != data[j]['relation']):
+                        contrafound = True
+                        contradiction = ("يوجد تناقض بين علاقة  " + pData['name'] + " مع " + data[i]['related'] + " : " + data[i]['relation'] + " ضد " + data[j]["relation"] )
+                        contradictions.append({"contradiction":contradiction, "name": pData["name"], "related": pair["relatedPerson"], "firstRelation": data[i]['relation'], "secondRelation": data[j]['relation']})
+                        break
+                    if(contrafound):
+                        break
+                if(contrafound):
+                    break
+
+    print({'contradiction':contradictions,'qData':qData})
+
+    #print(content)
+    resp = Response(json.dumps({'contradiction':contradictions,'qData':qData}))
     resp.headers["Access-Control-Expose-Headers"] = "*"
     resp.status = 200
     return resp
 
+@app.route("/auditions", methods=['GET', 'POST'])
+@cross_origin(supports_credentials=True)
+def get_auditions():
+    content = request.get_json(silent=True)
+    results = get_auditions_with_pairqas(content)
+    print(results)
+    resp = Response(json.dumps(results ,indent=4, sort_keys=True, default=str))
+    resp.status = 200
+    resp.headers["Access-Control-Expose-Headers"] = "*"
+    return resp  
 
 if __name__ == "__main__":
   app.run(host='127.0.0.1', port=5000, debug=True)

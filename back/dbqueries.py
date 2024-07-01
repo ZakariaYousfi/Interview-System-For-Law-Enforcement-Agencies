@@ -2,7 +2,7 @@ import psycopg2
 from psycopg2 import sql
 from datetime import date, timedelta
 import random
-
+from psycopg2.extras import RealDictCursor
 # Connection parameters - adjust as needed
 conn_params = {
     "dbname": "auditionDB",
@@ -133,6 +133,7 @@ def insert_audition_and_pairqa(person_id, affaire_id, person_type, question, ans
                 VALUES (%s, %s, %s)
             """, (question, answer, audition_id))
 
+
 def insert_relationpl(existence_date, hour, duration, statement_maker_id, lieu_id, qa_id):
     with connect_db() as conn:
         with conn.cursor() as cur:
@@ -157,24 +158,26 @@ def get_agent_by_credentials(username, password):
                 WHERE username = %s AND pass = %s
             """, (username, password))
             return cur.fetchone()
-
-def get_relationpl(statement_maker_id, qa_id):
+            
+def get_relationpl(statementMakerName):
     with connect_db() as conn:
         with conn.cursor() as cur:
             cur.execute("""
-                SELECT * FROM relationPL
-                WHERE statementMakerID = %s AND qaID = %s
-            """, (statement_maker_id, qa_id))
-            return cur.fetchone()
+                SELECT rpl.*, li.* 
+                FROM relationPL rpl
+                JOIN Lieu li ON rpl.lieuid = li.lieuid
+                WHERE statementMakerName = %s
+            """, (statementMakerName,))
+            return cur.fetchall()
 
-def get_relationpp(statement_maker_id, qa_id):
+def get_relationpp(statementMakerName, relatedPersonName):
     with connect_db() as conn:
         with conn.cursor() as cur:
             cur.execute("""
-                SELECT * FROM relationPP
-                WHERE statementMakerID = %s AND qaID = %s
-            """, (statement_maker_id, qa_id))
-            return cur.fetchone()
+                SELECT * FROM relationPP 
+                WHERE statementMakerName = %s AND relatedPersonName = %s
+            """, (statementMakerName, relatedPersonName))
+            return cur.fetchall()
 
 def insert_affaire_and_agent(case_type, description, agent_id):
     with connect_db() as conn:
@@ -281,12 +284,117 @@ def insert_pairqa_with_embeddings(question, answer, audition_id, q_embedding, a_
         with conn.cursor() as cur:
             cur.execute("""
                 INSERT INTO PairQA (question, answer, auditionID, qembedding, aembedding)
-                VALUES (%s, %s, %s, %s::vector, %s:vector)
+                VALUES (%s, %s, %s, %s::vector, %s::vector)
             """, (question, answer, audition_id, q_embedding, a_embedding))
 
+def add_person_and_create_audition(fullname, birthday, number, case_id, person_type):
+    with connect_db() as conn:
+        with conn.cursor() as cur:
+            # Check if person exists
+            cur.execute("SELECT personID FROM Person WHERE fullname = %s", (fullname,))
+            person = cur.fetchone()
+            
+            if person is None:
+                # Person doesn't exist, so add them
+                cur.execute("""
+                    INSERT INTO Person (fullname, birthday, number)
+                    VALUES (%s, %s, %s)
+                    RETURNING personID
+                """, (fullname, birthday, number))
+                person_id = cur.fetchone()[0]
+            else:
+                person_id = person[0]
+            
+            # Create audition
+            cur.execute("""
+                INSERT INTO Audition (personType, creationDate, affaireID, personID)
+                VALUES (%s, %s, %s, %s)
+                RETURNING auditionID
+            """, (person_type, date.today(), case_id, person_id))
+            
+            audition_id = cur.fetchone()[0]
+            
+            conn.commit()
+            return audition_id
+        
+def insert_pairqa_and_relationpp(audition_id, question, answer, q_embedding, a_embedding, statement_maker_name, related_person_name, relation):
+    with connect_db() as conn:
+        with conn.cursor() as cur:
+            # Insert PairQA
+            cur.execute("""
+                INSERT INTO PairQA (question, answer, auditionID, qembedding, aembedding)
+                VALUES (%s, %s, %s, %s::vector, %s::vector)
+                RETURNING pairID
+            """, (question, answer,audition_id, q_embedding, a_embedding))
+            pair_id = cur.fetchone()[0]
+            
+            # Insert relationPP
+            cur.execute("""
+                INSERT INTO relationPP (relation, qaID, statementMakerName, relatedPersonName)
+                VALUES (%s, %s, %s, %s)
+            """, (relation, pair_id, statement_maker_name, related_person_name))
+            
+            conn.commit()
+            return pair_id
+
+def insert_pairqa_lieu_and_relationpl(audition_id, question, answer, q_embedding, a_embedding, 
+                                      wilaya, daira, commune, statement_maker_name, 
+                                      year, month, day, heur, duration):
+    with connect_db() as conn:
+        with conn.cursor() as cur:
+            # Insert PairQA
+            cur.execute("""
+                INSERT INTO PairQA (question, answer, auditionID, qembedding, aembedding)
+                VALUES (%s, %s, %s, %s::vector, %s::vector)
+                RETURNING pairID
+            """, (question, answer,audition_id, q_embedding, a_embedding))
+            pair_id = cur.fetchone()[0]
+            
+            # Insert Lieu
+            cur.execute("""
+                INSERT INTO Lieu (wilaya, daira, commune)
+                VALUES (%s, %s, %s)
+                RETURNING lieuID
+            """, (wilaya, daira, commune))
+            lieu_id = cur.fetchone()[0]
+            
+            # Construct the date from year, month, day
+            existence_date = date(int(year), int(month), int(day))
+            
+            # Insert relationPL
+            cur.execute("""
+                INSERT INTO relationPL (existanceDate,heur, duration, statementMakerName, lieuID, qaID)
+                VALUES (%s, %s, %s, %s, %s, %s)
+            """, (existence_date,heur, duration, statement_maker_name, lieu_id, pair_id))
+            
+            conn.commit()
+            return pair_id, lieu_id
+        
+def get_auditions_with_pairqas(current_affaire_id):
+    with connect_db() as conn:
+        with conn.cursor(cursor_factory=RealDictCursor) as cur:
+            # First, get all auditions for the given affaire
+            cur.execute("""
+                SELECT * FROM Audition
+                WHERE affaireID = %s
+                ORDER BY auditionID
+            """, (current_affaire_id,))
+            auditions = cur.fetchall()
+
+            # For each audition, get its PairQAs
+            for audition in auditions:
+                cur.execute("""
+                    SELECT pairid, question, answer, auditionid FROM PairQA
+                    WHERE auditionID = %s
+                    ORDER BY pairID
+                """, (audition['auditionid'],))
+                audition['pairqas'] = cur.fetchall()
+
+            return auditions
+"""
 from sentence_transformers import SentenceTransformer, util
 model = SentenceTransformer('sentence-transformers/all-MiniLM-L6-v2')
-
+"""
 
 content = [
     {
@@ -328,6 +436,7 @@ caseType = "قتل"
 personType = "مشتبه به"
 # Example usage
 if __name__ == "__main__":
+    """
     qembedding = model.encode(qa["q"])
     aembedding = model.encode(qa["a"])
     # Get similar PairQA with context
@@ -340,6 +449,8 @@ if __name__ == "__main__":
             print(pair)
     else:
         print("No matching pairs found.")
+    
+    """
     """
     insert_dummy_data()
     print(get_affaires_of_agent(1))

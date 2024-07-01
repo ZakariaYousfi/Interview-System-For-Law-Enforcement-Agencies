@@ -3,11 +3,15 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
 import { Link} from 'react-router-dom';
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch} from "react-redux";
+import { setContradictions } from "../features/audition/auditionSlice";
+import { useNavigate } from "react-router-dom";
 function Audition() {
 
   const personData = useSelector(state => state.audition)
   const agentData = useSelector(state => state.agent)
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
   const type = agentData.affaires.find((affaire) => affaire.id == agentData.currentAffaire).type
 
   const [pairs, setPairs] = useState([]);
@@ -34,28 +38,74 @@ function Audition() {
   const add = async (e) => {
 
     e.preventDefault()
+    let person = ''
+    let pairs = {}
+    if(!isCustomQuestion){
 
-    const question = isCustomQuestion
-    ? customQuestion
-    : (selectedQuestion.includes("___") 
-    ? selectedQuestion.replace("___", gapFill) 
-    : selectedQuestion + year + "|" + month + "|" + day + "|" + hour)
+      if(selectedQuestion.includes("___")){
+      // we know it's a person person relation question
+      person = gapFill 
+      let question = selectedQuestion.replace("___", '') 
+      setGapFill('')
+      question = question + ' ' + person
+      pairs.relatedPerson = person
+      pairs.q = question
+      pairs.a = answer
+      pairs.type = 'pp'
+      } else {
+      // we know it's a person location relation
+      let question = selectedQuestion + year + "-" + month + "-" + day + "-" + hour + "-" + duration
+      let answer = wilaya + "-" + daira + "-" + commune + "-" + adresse
+      pairs.q = question 
+      pairs.a = answer
+      pairs.type = 'pl'
+      pairs.year = year
+      pairs.month = month
+      pairs.day = day
+      pairs.hour = hour
+      pairs.duration = duration 
+      pairs.wilaya = wilaya
+      pairs.daira = daira
+      pairs.commune = commune
+      pairs.adresse = adresse
+      }
+    }else {
+      // we know it's a question without relation
+      pairs.q = customQuestion
+      pairs.a = answer
+      pairs.type = 'no'
+    }
+    setPairs((prevPairs) => [...prevPairs, pairs])
+    setCustomQuestion("")
+    setAnswer("")
 
-    const pair = {
-      q: question,
-      a: answer
+  }
+
+  const close = async () => {
+
+
+    const url = import.meta.env.VITE_JSON_SERVER_URL + '/audition'
+
+    let pData = {
+      name: personData.name,
+      type: personData.type,
+      birthDate: personData.birthDate,
+      number: personData.number,
+      caseId: agentData.currentAffaire
     }
 
-    const url = import.meta.env.VITE_JSON_SERVER_URL 
+    const data = {
+      qData : pairs,
+      pData : pData
+    }
 
-    console.log(url)
     const response = await fetch(url, {
       method: "POST", // *GET, POST, PUT, DELETE, etc.
       mode: "cors", // no-cors, *cors, same-origin
       cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
       credentials: "same-origin", // include, *same-origin, omit
       dataType: 'json',
-      data: pair,
+      data: data,
       xhrFields: {
          withCredentials: true
       },
@@ -66,20 +116,18 @@ function Audition() {
       },
       redirect: "follow", // manual, *follow, error
       referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-      body: JSON.stringify(pair), // body data type must match "Content-Type" header
+      body: JSON.stringify(data), // body data type must match "Content-Type" header
     });
     const jsonResponse = await response.json();
     console.log(jsonResponse) // parses JSON response into native JavaScript objects
 
     if (response.ok) {
-      setPairs((prevPairs) => [...prevPairs, jsonResponse]);
-      setCustomQuestion("")
-      setAnswer("")
+      dispatch(setContradictions({contradictions:jsonResponse.contradiction, qData: jsonResponse.qData}))
+      navigate('/audition/1')
     } else {
-      console.error("Failed to add pair");
+      console.error("Contradiction detection failed");
     }
-
-  }
+  } 
 
   const handleQuestionTypeChange = () => {
     setIsCustomQuestion(!isCustomQuestion);
@@ -131,7 +179,8 @@ function Audition() {
         console.error("Recommendation failed");
       } 
   }
-  
+
+  /*
   const goToContradiction = async () => {
 
     const url = import.meta.env.VITE_JSON_SERVER_URL + '/contradiction'
@@ -165,14 +214,14 @@ function Audition() {
       console.error("Contradiction detection failed");
     } 
   }
-  
+  */
   return (
     <div className="flex flex-col h-screen">
       <header className="bg-gray-800 text-white p-4 flex justify-between items-center">
       <Link to="/home">
         <Button variant="primary">إلغاء الجلسة</Button>
       </Link>
-      <Button variant="primary" onClick = {goToContradiction}>إغلاق الجلسة</Button>
+      <Button variant="primary" onClick = {close}>إغلاق الجلسة</Button>
       <div className="text-right">
         <p className="text-lg font-semibold">{personData.type}</p>
         <p className="text-sm">الاسم : {personData.name}</p>
