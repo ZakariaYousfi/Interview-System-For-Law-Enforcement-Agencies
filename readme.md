@@ -1,4 +1,3 @@
-<<<<<<< HEAD:readme.md
 # Context
 This is my master's project. It is a web application which enables investigators to input interview data. the system provides 
 two AI technologies: contradiction detection and question recommendation. Our contradiction detection is a rule based method 
