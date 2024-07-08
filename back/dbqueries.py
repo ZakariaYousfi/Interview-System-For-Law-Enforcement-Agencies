@@ -317,7 +317,7 @@ def add_person_and_create_audition(fullname, birthday, number, case_id, person_t
             conn.commit()
             return audition_id
         
-def insert_pairqa_and_relationpp(audition_id, question, answer, q_embedding, a_embedding, statement_maker_name, related_person_name, relation):
+def insert_pairqa_and_relationpp(audition_id, question, answerص, q_embedding, a_embedding, statement_maker_name, related_person_name, relation):
     with connect_db() as conn:
         with conn.cursor() as cur:
             # Insert PairQA

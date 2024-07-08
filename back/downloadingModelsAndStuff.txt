@@ -1,0 +1,3 @@
+you must download the zip file for the word2vec model full_uni_cbow_300_twitter and extract it's content into a models folder in this directory 
+you must also download the all-MiniLM-L6-V2 from huggingface for the sentence similarity part
+other needed downloads are mentioned in the thesis
