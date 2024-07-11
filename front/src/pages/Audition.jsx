@@ -14,7 +14,7 @@ function Audition() {
   const navigate = useNavigate()
   const type = agentData.affaires.find((affaire) => affaire.id == agentData.currentAffaire).type
 
-  const [pairs, setPairs] = useState([]);
+  const [pairz, setPairz] = useState([]);
   const [recommended, setRecommended] = useState([]);
   const [isCustomQuestion, setIsCustomQuestion] = useState(true);
   const [selectedQuestion, setSelectedQuestion] = useState("");
@@ -75,7 +75,7 @@ function Audition() {
       pairs.a = answer
       pairs.type = 'no'
     }
-    setPairs((prevPairs) => [...prevPairs, pairs])
+    setPairz((prevPairs) => [...prevPairs, pairs])
     setCustomQuestion("")
     setAnswer("")
 
@@ -95,7 +95,7 @@ function Audition() {
     }
 
     const data = {
-      qData : pairs,
+      qData : pairz,
       pData : pData
     }
 
@@ -138,7 +138,7 @@ function Audition() {
 
   const getRecommendation = async () => {
   
-      const pair = pairs[pairs.length - 1]
+      const pair = pairz[pairz.length - 1]
   
       const url = import.meta.env.VITE_JSON_SERVER_URL + '/recommendation'
 
@@ -231,7 +231,7 @@ function Audition() {
     </header>
       <div className="flex flex-grow">
         <main className="flex-grow overflow-y-auto p-4 bg-white">
-          {pairs.map((pair, index) => (
+          {pairz.map((pair, index) => (
             <div key={index} className="mb-4 p-4 border rounded-lg shadow-sm">
               <h2 className="text-lg"> <span className="font-bold">سؤال : </span>{pair.q}؟</h2>
               <p className="mt-2"><span className="font-bold">جواب : {pair.a}</span></p>
